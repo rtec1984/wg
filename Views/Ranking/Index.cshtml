@@ -1,0 +1,78 @@
+﻿@{
+    TempData["LinkSessao"] = "";
+    TempData["Sessao"] = "Painel";
+    TempData["Pagina"] = "Ranking";
+    ViewData["Title"] = "Ranking";
+}
+<style>
+    table.dataTable tbody tr {
+        background-color: unset!important;
+    }
+</style>
+<section class="content">
+    <div class="container-fluid">
+        <div>
+            <div class="container">
+                <div id="grid">
+                    <table class="table" id="ranking">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Pontos</th>
+                                <th scope="col">Jogos</th>
+                                <th scope="col">Vitórias</th>
+                                <th scope="col">%</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        var table = $('#ranking').DataTable({
+            dom: 'Bfrltip',
+            pageLength: 30,
+            lengthMenu: [30, 50, 100, 200, 500, 1000],
+            ajax: "@Html.Raw("./Ranking/getRankings")",
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ],
+            order: [[2, 'desc'],[5, 'desc'],[4, 'desc'],[3, 'asc']],
+            columnDefs: [
+            {
+                orderable: false,
+                targets: [0, 1, 2, 3, 4, 5],
+            },
+            ],
+            columns: [
+                {
+                  "data": "",
+                  "defaultContent": ""
+                },
+                { data: 'nome' },
+                { data: 'pontuacao' },
+                { data: 'jogos' },
+                { data: 'vitorias' },
+                {
+                    data: null,
+                    className: 'options',
+                    render: function (data, type, full, meta) {
+                        return (data.vitorias / (data.vitorias + data.derrotas)).toFixed(2) * 100;
+                    }
+                }                    
+            ],
+        });
+
+        table.on('order.dt', function () {
+            let e = 1; 
+            table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(e++);
+            });
+        }).draw();
+    });
+</script>

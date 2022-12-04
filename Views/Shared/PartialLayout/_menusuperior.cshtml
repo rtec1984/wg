@@ -1,0 +1,54 @@
+﻿@using ProjectAmaterasu.Extensions
+
+<ul class="navbar-nav">
+    @if (User.Identity.GetRole() == "Usuario_Comum")
+    {
+    
+    <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/painel" class="nav-link">Home</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/partida" class="nav-link">Listar Partidas</a>
+    </li> 
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/criar-partida" class="nav-link">Criar Partida</a>
+    </li> 
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/ranking" class="nav-link">Ranking</a>
+    </li> 
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/historico-ranking" class="nav-link">Histórico do Ranking</a>
+    </li>
+    }
+    else if (User.Identity.GetRole() == "Administrador"){
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/painel-administrador" class="nav-link">Home</a>
+        </li>
+    }
+</ul>
+<ul class="navbar-nav ml-auto">
+        @if (User.Identity.GetRole() == "Usuario_Comum")
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="/perfil" role="button">
+                <i class="fas fa-user-circle"></i>
+            </a>
+        </li>
+    }
+    <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="~/sair" title="Sair">
+            <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+        </a>
+    </li>
+</ul>

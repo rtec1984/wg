@@ -1,0 +1,152 @@
+﻿@{
+    Layout = null;
+}
+<title>Login</title>
+<link href="~/css/login.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+
+<ul class="theme-picker">
+    <li data-theme="barney" class="barney"></li>
+    <li data-theme="firewatch" class="firewatch"></li>
+    <li data-theme="citrus" class="citrus"></li>
+    <li data-theme="marsh" class="marsh"></li>
+    <li data-theme="frost" class="frost"></li>
+    <li data-theme="slate" class="slate"></li>
+    <li data-theme="candy" class="candy"></li>
+</ul>
+
+<form class="form" action="/Login/EsqueciASenha" id="formEsqueciASenha" method="post" style="perspective: none!important">
+    <h1>Olá</h1>
+    <p>Digite seu email para recuperar sua senha.</p>
+    <div class="input-wrapper">
+        <input type="text" placeholder="Digite seu e-mail" name="Email" class="Email" />
+        <i class='bx bxs-envelope'></i>
+    </div>
+    <div class="button-wrapper">
+        <button type="button" onclick="location.href='/'">
+            Fazer Login
+        </button>
+        <button type="submit">
+            Solicitar Senha
+            <i class="bx bx-right-arrow-alt"></i>
+        </button>
+    </div>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/js.cookie.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script>
+    let themeList = document.querySelector(".theme-picker");
+    let defaultThemeItem = themeList.firstElementChild;
+    let themeListItems = themeList.childNodes;
+    let themeTracker = themeState();
+    let listItemTracker = itemState();
+    let bodyElement = document.body;
+    let form = document.querySelector(".form");
+
+    init();
+
+    function getCookie(name) {
+        var value = "." + Cookies.get('logincolor');
+        return value
+    }
+
+    function init() {
+        bindEvents();
+        setTheme();
+        //defaultThemeItem.click();
+        var cookie = getCookie();
+        $(cookie).click();
+    }
+
+
+    function bindEvents() {
+        themeListItems.forEach(function (element) {
+            element.addEventListener("click", handleThemeChange);
+        });
+    }
+
+    function handleThemeChange(event) {
+        let selectedItem = event.target;
+        let selectedTheme = event.target.dataset.theme;
+
+        if (
+            !selectedItem.classList.contains("pressed") &&
+            !form.classList.contains("rotate")
+        ) {
+            form.classList.add("rotate");
+
+            setSelectedThemeItem(selectedItem);
+
+            setTimeout(() => {
+                setTheme(selectedTheme);
+            }, 650);
+
+            setTimeout(() => {
+                form.classList.remove("rotate");
+            }, 1500);
+        }
+    }
+
+    function setTheme(selectedTheme) {
+        bodyElement.classList.remove(themeTracker.get());
+        themeTracker.set(selectedTheme);
+        bodyElement.classList.add(themeTracker.get());
+    }
+
+    function setSelectedThemeItem(selectedItem) {
+        listItemTracker.get()?.classList.remove("pressed");
+        listItemTracker.set(selectedItem);
+        document.cookie = "logincolor=" + selectedItem.className + "; expires=Thu, 31 Dec 2099 12:00:00 UTC";
+        listItemTracker.get().classList.add("pressed");
+    }
+
+    function themeState() {
+        let selectedTheme = null;
+        return {
+            set: function (theme) {
+                selectedTheme = theme;
+            },
+
+            get: function () {
+                return selectedTheme;
+            }
+        };
+    }
+
+    function itemState() {
+        let selectedItem = null;
+        return {
+            set: function (item) {
+                selectedItem = item;
+            },
+
+            get: function () {
+                return selectedItem;
+            }
+        };
+    }
+
+    $(document).ready(function () {
+        document.getElementsByTagName("center")[0].style.display = "none"
+    });
+
+    $("#formEsqueciASenha").validate({
+        rules: {
+            Email: {
+                required: true,
+                email: true,
+            }
+        },
+        messages: {
+            Email: {
+                required: "Esse campo é obrigatório",
+                email: "O E-mail não está no formato adequado",
+            }
+        }
+    });
+</script>

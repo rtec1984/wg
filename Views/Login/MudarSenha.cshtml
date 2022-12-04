@@ -1,0 +1,169 @@
+﻿@{
+    Layout = null;
+}
+<title>Cadastre-se</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link href="~/css/alerts.css" rel="stylesheet" />
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css' rel='stylesheet'>
+<link href="~/css/login.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+
+<ul class="theme-picker">
+    <li data-theme="barney" class="barney"></li>
+    <li data-theme="firewatch" class="firewatch"></li>
+    <li data-theme="citrus" class="citrus"></li>
+    <li data-theme="marsh" class="marsh"></li>
+    <li data-theme="frost" class="frost"></li>
+    <li data-theme="slate" class="slate"></li>
+    <li data-theme="candy" class="candy"></li>
+</ul>
+
+<form class="form" asp-controller="Login" asp-action="SalvarSenha" id="formCadastro" method="post" style="perspective: none!important">
+    <h1>Mude a sua senha</h1>
+    <p>Essa senha será utilizada daqui para frente para acessar o sistema.</p>
+
+    <input type="text" placeholder="Digite seu Nome" name="CodigoConfirmacao" id="CodigoConfirmacao" value="@TempData["CodigoConfirmacao"]" hidden />
+    <input type="text" placeholder="Digite seu e-mail" name="Email" id="Email" class="Email" value="@TempData["EmailMudarSenha"]" hidden />
+    <div class="input-wrapper">
+        <input type="password" placeholder="Digite sua senha" name="Senha" min-lenght="8" id="Senha" />
+        <i class="bx bx-key"></i>
+    </div>
+    <div class="input-wrapper">
+        <input type="password" placeholder="Confirme sua senha" name="ConfirmeSenha" id="ConfirmeSenha" />
+        <i class="bx bx-key"></i>
+    </div>
+
+    <div class="button-wrapper">
+        <button type="submit">
+            Salvar
+            <i class="bx bx-right-arrow-alt"></i>
+        </button>
+    </div>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/js.cookie.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script>
+    let themeList = document.querySelector(".theme-picker");
+    let defaultThemeItem = themeList.firstElementChild;
+    let themeListItems = themeList.childNodes;
+    let themeTracker = themeState();
+    let listItemTracker = itemState();
+    let bodyElement = document.body;
+    let form = document.querySelector(".form");
+
+    init();
+
+    function getCookie(name) {
+        var value = "." + Cookies.get('logincolor');
+        return value
+    }
+
+    function init() {
+        bindEvents();
+        setTheme();
+        //defaultThemeItem.click();
+        var cookie = getCookie();
+        $(cookie).click();
+    }
+
+
+    function bindEvents() {
+        themeListItems.forEach(function (element) {
+            element.addEventListener("click", handleThemeChange);
+        });
+    }
+
+    function handleThemeChange(event) {
+        let selectedItem = event.target;
+        let selectedTheme = event.target.dataset.theme;
+
+        if (
+            !selectedItem.classList.contains("pressed") &&
+            !form.classList.contains("rotate")
+        ) {
+            form.classList.add("rotate");
+
+            setSelectedThemeItem(selectedItem);
+
+            setTimeout(() => {
+                setTheme(selectedTheme);
+            }, 650);
+
+            setTimeout(() => {
+                form.classList.remove("rotate");
+            }, 1500);
+        }
+    }
+
+    function setTheme(selectedTheme) {
+        bodyElement.classList.remove(themeTracker.get());
+        themeTracker.set(selectedTheme);
+        bodyElement.classList.add(themeTracker.get());
+    }
+
+    function setSelectedThemeItem(selectedItem) {
+        listItemTracker.get()?.classList.remove("pressed");
+        listItemTracker.set(selectedItem);
+        document.cookie = "logincolor=" + selectedItem.className + "; expires=Thu, 31 Dec 2099 12:00:00 UTC";
+        listItemTracker.get().classList.add("pressed");
+    }
+
+    function themeState() {
+        let selectedTheme = null;
+        return {
+            set: function (theme) {
+                selectedTheme = theme;
+            },
+
+            get: function () {
+                return selectedTheme;
+            }
+        };
+    }
+
+    function itemState() {
+        let selectedItem = null;
+        return {
+            set: function (item) {
+                selectedItem = item;
+            },
+
+            get: function () {
+                return selectedItem;
+            }
+        };
+    }
+
+    $("#formCadastro").validate({
+        rules: {
+            Senha: {
+                required: true,
+                minlength: 8
+            },
+            ConfirmeSenha: {
+                required: true,
+                equalTo: "#Senha",
+            }
+        },
+        messages: {
+            Senha: {
+                required: "Esse campo é obrigatório",
+                minlength: "A senha deve ter no mínimo 8 caracteres"
+            },
+            ConfirmeSenha: {
+                required: "Esse campo é obrigatório",
+                equalTo: "As senhas não coincidem.",
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        document.getElementsByTagName("center")[0].style.display = "none"
+    });
+</script>

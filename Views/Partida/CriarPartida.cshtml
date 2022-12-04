@@ -1,0 +1,220 @@
+﻿@using ProjectAmaterasu.Extensions
+@model PartidaModels;
+@{
+    TempData["LinkSessao"] = "";
+    TempData["Sessao"] = "Partida";
+    TempData["Pagina"] = "Criar Partida";
+    ViewData["Title"] = "Partida";
+    var Usuarios = ViewData["Usuario"] as List<UsuarioModels>;
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Partida</h3>
+                    </div>
+                    <form asp-controller="Partida" asp-action="SalvarPartida" method="post" id="formPartida">
+                        <div class="card-body">
+                            <div class="row">
+                                <input asp-for="Id" class="form-control" hidden readonly />
+                                <div class="input-wrapper col-lg-4">
+                                    <label for="exampleInputEmail1">Data da Partida</label>
+                                    <input type="date" asp-for="Data" class="form-control" />
+                                </div>
+                                @*                                <div class="col-lg-4">
+                                <label for="exampleInputEmail1">Jogador</label>
+                                <input type="text" class="form-control" value="@User.Identity.GetName()" readonly/>
+                                <input type="text" asp-for="Id_Usuario" class="form-control" value="@User.Identity.GetSessionID()" hidden readonly />
+                                </div>*@
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Jogador 2</label>
+                                    <select asp-for="Id_Usuario_2" id="select_usuario_2" class="form-control id_usuario" style="height: none!important;">
+                                        <option value="">Selecione</option>
+                                        @foreach (var item in Usuarios)
+                                        {
+                                            @if(item.Id != User.Identity.GetSessionID())
+                                            {
+                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                            }                                       
+                                        }
+                                    </select>
+                                    <label id="select_usuario_2-error" class="error" for="select_usuario_2"></label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Jogador 3</label>
+                                    <select asp-for="Id_Usuario_3" id="select_usuario_3" class="form-control id_usuario" style="height: none!important;">
+                                        <option value="">Selecione</option>
+                                        @foreach (var item in Usuarios)
+                                        {
+                                            @if(item.Id != User.Identity.GetSessionID())
+                                            {
+                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                            }                                        
+                                        }
+                                    </select>
+                                    <label id="select_usuario_3-error" class="error" for="select_usuario_3"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Jogador 4</label>
+                                    <select asp-for="Id_Usuario_4" id="select_usuario_4" class="form-control id_usuario" style="height: none!important;">
+                                        <option value="">Selecione</option>
+                                        @foreach (var item in Usuarios)
+                                        {
+                                            @if(item.Id != User.Identity.GetSessionID())
+                                            {
+                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Jogador 5</label>
+                                    <select asp-for="Id_Usuario_5" id="select_usuario_5" class="form-control id_usuario" style="height: none!important;">
+                                        <option value="">Selecione</option>
+                                        @foreach (var item in Usuarios)
+                                        {
+                                            @if(item.Id != User.Identity.GetSessionID())
+                                            {
+                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                            }                                        
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Jogador 6</label>
+                                    <select asp-for="Id_Usuario_6" id="select_usuario_6" class="form-control id_usuario" style="height: none!important;">
+                                        <option value="">Selecione</option>
+                                        @foreach (var item in Usuarios)
+                                        {
+                                            @if(item.Id != User.Identity.GetSessionID())
+                                            {
+                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                            }                                       
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Hora de Inicio</label>
+                                    <input type="datetime-local" id="Comeco" class="form-control" />
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Hora de Termino</label>
+                                    <input type="datetime-local" id="Termino" class="form-control" />
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Duração da Partida</label>
+                                    <input asp-for="Duracao" id="minutos" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <label id="duplicacao" style="color: red"></label>
+                            <button type="submit" class="btn btn-primary float-right" id="btnSalvar">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        $("#Comeco, #Termino").change(function () {
+            function formatar_segundos(h, min, s) {
+                return (h * 3600) + (min * 60);
+            }
+
+            var dtChegadas = $("#Comeco").val();
+            var dtPartidas = $("#Termino").val();
+
+            var dtChegada = new Date(dtChegadas);
+            var dtPartida = new Date(dtPartidas);
+
+            var ms = moment(dtPartida, "DD/MM/YYYY HH:mm:ss").diff(moment(dtChegada, "DD/MM/YYYY HH:mm:ss"));
+            var d = moment.duration(ms);
+            var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+            var format = formatar_segundos(s.split(':')[0], s.split(':')[1], s.split(':')[2])
+            var minutes = format / 60
+            if (!isNaN(minutes)) {
+                $("#minutos").val(minutes);
+            }
+            console.log(minutes);
+        })
+
+        function Fade() {
+            setTimeout(function () {
+                var Aviso = document.getElementById("Aviso");
+                if (Aviso != null) {
+                    Aviso.style.display = "none";
+                }
+            }, 10000);
+        }
+
+        $("#formPartida").validate({
+            rules: {
+                Id_Usuario_2: {
+                    required: true,
+                },
+                Id_Usuario_3: {
+                    required: true,
+                },
+                Data: {
+                    required: true,
+                },
+            },
+            messages: {
+                Id_Usuario_2: {
+                    required: "Esse campo é obrigatório",
+                },
+                Id_Usuario_3: {
+                    required: "Esse campo é obrigatório",
+                },
+                Data: {
+                    required: "Esse campo é obrigatório",
+                },
+            }
+        });
+
+        $(document).ready(function () {
+            $("#select_usuario_2, #select_usuario_3, #select_usuario_4, #select_usuario_5, #select_usuario_6").select2();
+
+            document.getElementsByTagName("center")[0].style.display = "none"
+        });
+
+        $("#formPartida").on("change", function (e) {
+            var duplicate=false;            
+            $('.id_usuario').each(function(){
+                var $this = $(this);
+                if ($this.val()===''){ return;}
+                $('.id_usuario').not($this).each(function(){
+                    if ( $(this).val()==$this.val()) {duplicate=true;}
+                });
+            });
+            
+            if(duplicate) {
+                $("#duplicacao").html("Existem jogadores duplicados nessa partida, favor verificar.");
+                $("#btnSalvar").attr("disabled", true);
+            }
+            else
+            {
+                $("#duplicacao").html("");
+                $("#btnSalvar").attr("disabled", false);
+            }
+        });
+
+        $(window).keydown(function(event){
+           if(event.keyCode == 13) {
+             event.preventDefault();
+             return false;
+           }
+         });
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿@model List<UsuarioViewModels>;
+@{
+    ViewData["Title"] = "Histórico de Rankings";
+}
+
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <label class="control-label text-center" for="Onibus">Lista de Datas</label>
+        <div class="button dropdown">
+            <select for="Data " name="Data" id="Data" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                <option value="">Selecione</option>
+                @foreach (var item in Model)
+                {
+                    <option value="/historico-ranking/@item.Data.ToString("dd-MM-yyyy")">@item.Data.ToString("MM/yyyy")</option>
+                }
+            </select>
+        </div>
+        <label id="Data-error" class="error" for=""></label>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@using ProjectAmaterasu.Extensions
+@model List<PartidaModels>
+@{
+    TempData["LinkSessao"] = "";
+    TempData["Sessao"] = "Painel";
+    TempData["Pagina"] = "Partida";
+    ViewData["Title"] = "Partida";
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Partida @item.Id - @item.Data.ToString("dd/MM/yyyy") - @Html.Raw(item.Duracao +"m")</h3>
+                            <div class="card-tools">
+                                @if (item.Id_Usuario == User.Identity.GetSessionID() && item.Data.AddDays(2) >= DateTime.Now)
+                                {
+                                    <a href="~/deletar-partida/@item.Id"  onclick="return confirm('Tem certeza que deseja deletar a partida?');">
+                                        <i class="bi bi-x-circle"></i>
+                                    </a>
+                                    <a href="~/alterar-partida/@item.Id">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                }
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="display: block;">
+                            <p style="color: green; margin-bottom: 2px!important;"><i class="bi bi-check-circle-fill"></i> @Html.Raw(item.Nome)</p>
+                            <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_2)</p>
+                            <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_3)</p>
+                            @if (!String.IsNullOrEmpty(item.Nome_4))
+                            {
+                                <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_4)</p>
+                            }
+                            @if (!String.IsNullOrEmpty(item.Nome_5))
+                            {
+                                <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_5)</p>
+                            }
+                            @if (!String.IsNullOrEmpty(item.Nome_6))
+                            {
+                                <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_6)</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
