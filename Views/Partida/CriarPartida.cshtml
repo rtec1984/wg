@@ -37,7 +37,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " - " + item.Apelido)</option>
                                             }                                       
                                         }
                                     </select>
@@ -51,7 +51,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " - " + item.Apelido)</option>
                                             }                                        
                                         }
                                     </select>
@@ -67,7 +67,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " - " + item.Apelido)</option>
                                             }
                                         }
                                     </select>
@@ -80,7 +80,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " - " + item.Apelido)</option>
                                             }                                        
                                         }
                                     </select>
@@ -93,7 +93,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome)</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " - " + item.Apelido)</option>
                                             }                                       
                                         }
                                     </select>

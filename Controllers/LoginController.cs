@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using MimeKit;
 using MailKit.Net.Smtp;
 using MimeKit.Text;
+using ProjectAmaterasu.Extensions;
 
 namespace ProjectAmaterasu.Controllers
 {
@@ -221,7 +222,7 @@ namespace ProjectAmaterasu.Controllers
                 var propriedadesDeAutenticacao = new AuthenticationProperties
                 {
                     AllowRefresh = true,
-                    ExpiresUtc = DateTime.Now.ToLocalTime().AddHours(2),
+                    ExpiresUtc = DateTime.Now.ToLocalTime().AddDays(9999),
                     IsPersistent = true
                 };
 
@@ -281,21 +282,30 @@ namespace ProjectAmaterasu.Controllers
             }
             else
             {
+                if (usuario.Nome.Split(' ').Count() > 1)
+                {
+                    usuario.Nome = usuario.Nome.Split(' ')[0] + " " + usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1];
+                }
+                else
+                {
+                    return Redirect("/");
+                }
+
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
                     usuario.Email = usuario.Email.ToLower();
-                    var UsuarioVerificacao = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE @Email = Email", new { email = usuario.Email }).FirstOrDefault();
+                    var UsuarioVerificacao = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE @Email = Email OR Apelido = @Apelido", new { email = usuario.Email, apelido = usuario.Apelido }).FirstOrDefault();
 
                     if (UsuarioVerificacao == null)
                     {
                         var criptografia = BCrypt.Net.BCrypt.HashPassword(usuario.Email + "salt" + usuario.Senha, workFactor: 12);
                         usuario.Senha = criptografia;
                         TempData["ValidacaoSenha"] = "Cadastro realizado com sucesso, favor realizar o login para acessar demais funcionalidades do sistema.";
-                        connection.Execute("INSERT INTO Usuario (Nome, Email, Senha, Tema) Values (@Nome, @Email, @Senha, '1')", usuario);
+                        connection.Execute("INSERT INTO Usuario (Nome, Email, Senha, Tema, Apelido) Values (@Nome, @Email, @Senha, '1', @Apelido)", usuario);
                     }
                     else
                     {
-                        TempData["ContaExistente"] = "Esse e-mail já está cadastrado, caso não recorde da senha utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a>";
+                        TempData["ContaExistente"] = "Esse e-mail ou apelido já está cadastrado, caso não recorde da senha utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a>";
                     }
                     return Redirect("/");
                 }

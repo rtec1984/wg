@@ -49,8 +49,8 @@ namespace ProjectAmaterasu.Controllers
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
-                var Partida = connection.Query<PartidaModels>(@"SELECT * FROM Partida WHERE Id = @Id", new { Id = id }).FirstOrDefault();
-                var Usuario = connection.Query<UsuarioModels>(@"SELECT Id, Nome FROM Usuario").ToList();
+                var Partida = connection.Query<PartidaModels>(@"SELECT * FROM Partida WHERE Id = @Id AND Id_Usuario = @Id_Usuario", new { Id = id, Id_Usuario = User.Identity.GetSessionID() }).FirstOrDefault();
+                var Usuario = connection.Query<UsuarioModels>(@"SELECT Id, Nome, Apelido FROM Usuario").ToList();
                 ViewData["Usuario"] = Usuario;
                 if (Partida != null)
                 {
@@ -66,14 +66,20 @@ namespace ProjectAmaterasu.Controllers
         [Authorize(Roles = "Usuario_Comum")]
         public IActionResult SalvarPartida(PartidaModels partida)
         {
+            if (partida.Duracao < 0)
+            {
+                return Redirect("~/partida");
+            }
+
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 partida.Id_Usuario = User.Identity.GetSessionID();
                 partida.Pontuacao = CalcularPontuacao(partida.Duracao);
+
                 var Partida = connection.Query<PartidaModels>(@"SELECT * FROM Partida WHERE Id = @Id AND Id_Usuario = @Id_Usuario", new { Id = partida.Id, Id_Usuario = partida.Id_Usuario }).FirstOrDefault();
                 if (Partida != null)
                 {
-                    connection.Execute("UPDATE Partida SET Id_Usuario_2 = @Id_Usuario_2, Id_Usuario_3 = @Id_Usuario_3, Id_Usuario_4 = @Id_Usuario_4, Id_Usuario_5 = @Id_Usuario_5, Id_Usuario_6 = @Id_Usuario_6, Duracao = @Duracao, Pontuacao = @Pontuacao WHERE Id = @Id", partida);
+                    connection.Execute(@"UPDATE Partida SET Id_Usuario_2 = @Id_Usuario_2, Id_Usuario_3 = @Id_Usuario_3, Id_Usuario_4 = @Id_Usuario_4, Id_Usuario_5 = @Id_Usuario_5, Id_Usuario_6 = @Id_Usuario_6, Duracao = @Duracao, Pontuacao = @Pontuacao WHERE Id = @Id", partida);
 
                     return Redirect("~/partida");
                 }
@@ -90,7 +96,11 @@ namespace ProjectAmaterasu.Controllers
         protected int CalcularPontuacao(int duracao)
         {
             int pontuacao = 0;
-            if (duracao <= 30)
+            if (duracao == 0)
+            {
+                pontuacao = 0;
+            }
+            else if (duracao <= 30)
             {
                 pontuacao = 40;
             }
@@ -115,7 +125,11 @@ namespace ProjectAmaterasu.Controllers
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
-                connection.Execute(@"DELETE FROM Partida Where Id = @id", new { id });
+                var Partida = connection.Query<PartidaModels>(@"SELECT * FROM Partida WHERE Id_Usuario = @Id_Usuario", new { Id_Usuario = User.Identity.GetSessionID() }).FirstOrDefault();
+                if (Partida != null)
+                {
+                    connection.Execute(@"DELETE FROM Partida Where Id = @id", new { id });
+                }
 
                 return Redirect("~/partida");
             }

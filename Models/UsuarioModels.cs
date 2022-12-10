@@ -6,6 +6,7 @@ namespace ProjectAmaterasu.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string Apelido { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Tema { get; set; }
@@ -20,6 +21,7 @@ namespace ProjectAmaterasu.Models
         public int Vitorias { get; set; }
         public int Derrotas { get; set; }
         public int Pontuacao { get; set; }
+        public int Posicao { get; set; }
         public DateTime Data { get; set; }        
     }
 }

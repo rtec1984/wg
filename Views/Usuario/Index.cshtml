@@ -20,6 +20,11 @@
                                 <label for="exampleInputEmail1">Nome</label>
                                 <input type="text" asp-for="Nome" placeholder="Digite seu Nome" class="form-control" />
                                 <i class="bx bxs-user-circle"></i>
+                            </div> 
+                            <div class="input-wrapper">
+                                <label for="exampleInputEmail1">Apelido (Este apelido deve ser único no sistema)</label>
+                                <input type="text" asp-for="Apelido" placeholder="Digite seu Apelido" class="form-control" maxlength="50" />
+                                <i class="bx bxs-user-circle"></i>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">E-mail</label>
@@ -54,10 +59,16 @@
             rules: {
                 Nome: {
                     required: true,
+                },
+                Apelido: {
+                    required: true,
                 }
             },
             messages: {
                 Nome: {
+                    required: "Esse campo é obrigatório",
+                },
+                Apelido: {
                     required: "Esse campo é obrigatório",
                 }
             }

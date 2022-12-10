@@ -12,7 +12,7 @@
             @foreach (var item in Model)
             {
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="card card-success">
+                    <div class="card card-success collapsed-card">
                         <div class="card-header">
                             <h3 class="card-title">Partida @item.Id - @item.Data.ToString("dd/MM/yyyy") - @Html.Raw(item.Duracao +"m")</h3>
                             <div class="card-tools">
@@ -26,11 +26,11 @@
                                     </a>
                                 }
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
+                                    <i class="fas fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="card-body" style="display: block;">
+                        <div class="card-body" style="display: none;">
                             <p style="color: green; margin-bottom: 2px!important;"><i class="bi bi-check-circle-fill"></i> @Html.Raw(item.Nome)</p>
                             <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_2)</p>
                             <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_3)</p>
