@@ -86,7 +86,7 @@ namespace ProjectAmaterasu.Controllers
                     vitorias = x.Vitorias,
                     jogos = x.Jogos,
                     derrotas = x.Derrotas,
-                    pontuacao = x.Pontuacao,
+                    pontuacao = x.Pontuacao * x.Vitorias / (x.Vitorias + x.Derrotas),
                     desempenho = x.Desempenho,
                 }).ToList();
 
