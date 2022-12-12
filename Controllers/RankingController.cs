@@ -46,7 +46,7 @@ namespace ProjectAmaterasu.Controllers
                     vitorias = x.Vitorias,
                     jogos = x.Vitorias + x.Derrotas,
                     derrotas = x.Derrotas,
-                    pontuacao = x.Pontuacao,
+                    pontuacao = x.Pontuacao * x.Vitorias/(x.Vitorias + x.Derrotas),
                 }).Distinct().ToList();
                 return Json(new { data = usuario });
             }
