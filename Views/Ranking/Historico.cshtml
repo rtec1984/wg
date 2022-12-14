@@ -12,7 +12,7 @@
                 <option value="">Selecione</option>
                 @foreach (var item in Model)
                 {
-                    <option value="/historico-ranking/@item.Data.ToString("dd-MM-yyyy")">@item.Data.ToString("MM/yyyy")</option>
+                    <option value="/historico-ranking/@item.Data.ToString("dd-MM-yyyy")">@item.Data.AddMonths(-1).ToString("MM/yyyy")</option>
                 }
             </select>
         </div>

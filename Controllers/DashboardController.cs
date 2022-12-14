@@ -75,8 +75,8 @@ namespace ProjectAmaterasu.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Administrador")]
-        public IActionResult ResetarRanking()
+        //[Authorize(Roles = "Administrador")]
+        public IActionResult BewertungZurucksetzen()
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
@@ -101,10 +101,10 @@ namespace ProjectAmaterasu.Controllers
                 var inserir = connection.Execute(@"INSERT INTO Historico (Id_Usuario, Nome_Usuario, Vitorias, Jogos, Derrotas, Pontuacao, Desempenho) 
                                      VALUES (@id, @nome, @vitorias, @jogos, @derrotas, @pontuacao, @desempenho)", usuario);
 
-                if (inserir == usuario.Count())
-                {
-                    connection.Execute(@"TRUNCATE TABLE Partida");
-                }
+                //if (inserir == usuario.Count())
+                //{
+                //    connection.Execute(@"TRUNCATE TABLE Partida");
+                //}
 
                 return Redirect("~/painel-administrador");
             }
