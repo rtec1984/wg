@@ -101,10 +101,10 @@ namespace ProjectAmaterasu.Controllers
                 var inserir = connection.Execute(@"INSERT INTO Historico (Id_Usuario, Nome_Usuario, Vitorias, Jogos, Derrotas, Pontuacao, Desempenho) 
                                      VALUES (@id, @nome, @vitorias, @jogos, @derrotas, @pontuacao, @desempenho)", usuario);
 
-                //if (inserir == usuario.Count())
-                //{
-                //    connection.Execute(@"TRUNCATE TABLE Partida");
-                //}
+                if (inserir == usuario.Count())
+                {
+                    connection.Execute(@"truncate table partida");
+                }
 
                 return Redirect("~/painel-administrador");
             }
