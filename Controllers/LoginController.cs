@@ -75,7 +75,7 @@ namespace ProjectAmaterasu.Controllers
                     {
                         TempData["EmailCadastrado"] = Usuario.Email;
                         TempData["ContaExistente"] = "Esta conta se encontra em processo de mudança de senha, verifique o e-mail:<br> " +
-                            "<label id='EmailCadastrado'></label>, para mais instruções ou utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a> .";
+                            "<label id='EmailCadastrado'></label>, para mais instruções ou utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a>";
                         return Redirect("~/login-administrador");
                     }
                     else if (Usuario != null)
@@ -136,7 +136,7 @@ namespace ProjectAmaterasu.Controllers
                     {
                         TempData["EmailCadastrado"] = Usuario.Email;
                         TempData["ContaExistente"] = "Esta conta se encontra em processo de mudança de senha, verifique o e-mail:<br> " +
-                            "<label id='EmailCadastrado'></label>, para mais instruções ou utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a> .";
+                            "<label id='EmailCadastrado'></label>, para mais instruções ou utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a>";
                         return Redirect("/");
                     }
                     else if (Usuario != null)
@@ -362,7 +362,7 @@ namespace ProjectAmaterasu.Controllers
                 }
                 else
                 {
-                    TempData["ValidacaoSenha"] = "Email ou CPF não cadastrados, favor digitar novamente ou pedimos que contate nosso atendimento pelo telefone (11) 5090-7419.";
+                    TempData["ContaExistente"] = "Email não cadastrado, favor digitar novamente ou avisar o administrador do grupo WAR-GROW";
                 }
             }
 

@@ -42,7 +42,7 @@ namespace ProjectAmaterasu.Controllers
                     vitorias = x.Vitorias,
                     jogos = x.Vitorias + x.Derrotas,
                     derrotas = x.Derrotas,
-                    pontuacao = x.Pontuacao,
+                    pontuacao = x.Pontuacao * x.Vitorias / (x.Vitorias + x.Derrotas),
                     desempenho = CalcularDesempenho(x.Vitorias, x.Derrotas),
                 }).Distinct().ToList().OrderByDescending(x => x.pontuacao).ThenByDescending(x => x.desempenho).ThenByDescending(x => x.vitorias).ThenBy(x => x.jogos);
                 int posicao = usuario.TakeWhile(x => x.id != User.Identity.GetSessionID()).Count() + 1;

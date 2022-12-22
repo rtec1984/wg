@@ -13,8 +13,8 @@
             {
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="card card-success collapsed-card">
-                        <div class="card-header">
-                            <h3 class="card-title">Partida @item.Id - @item.Data.ToString("dd/MM/yyyy") - @Html.Raw(item.Duracao +"m")</h3>
+                        <div class="card-header" style="background-color: #343a40;">
+                            <h3 class="card-title">Partida @item.Id - @item.Data.ToString("dd/MM/yyyy")<br>Duração: @Html.Raw(item.Duracao +" minutos")</h3>
                             <div class="card-tools">
                                 @if (item.Id_Usuario == User.Identity.GetSessionID() && item.Data.AddDays(2) >= DateTime.Now)
                                 {

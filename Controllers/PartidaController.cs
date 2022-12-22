@@ -35,7 +35,7 @@ namespace ProjectAmaterasu.Controllers
                                                                 (SELECT Nome FROM Usuario WHERE Usuario.Id = Id_Usuario_4) as Nome_4,
                                                                 (SELECT Nome FROM Usuario WHERE Usuario.Id = Id_Usuario_5) as Nome_5,
                                                                 (SELECT Nome FROM Usuario WHERE Usuario.Id = Id_Usuario_6) as Nome_6
-                                                                FROM Partida").ToList();
+                                                                FROM Partida").OrderByDescending(x => x.Id).ToList();
 
                 return View(Partidas);
             }
