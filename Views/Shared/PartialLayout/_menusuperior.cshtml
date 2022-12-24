@@ -8,19 +8,22 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-        <a href="/painel" class="nav-link">Home</a>
+        <a href="/painel" class="nav-link">Painel</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/criar-partida" class="nav-link">Criar Partida</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
         <a href="/partida" class="nav-link">Listar Partidas</a>
-    </li> 
-    <li class="nav-item d-none d-sm-inline-block">
-        <a href="/criar-partida" class="nav-link">Criar Partida</a>
     </li> 
     <li class="nav-item d-none d-sm-inline-block">
         <a href="/ranking" class="nav-link">Ranking</a>
     </li> 
     <li class="nav-item d-none d-sm-inline-block">
         <a href="/historico-ranking" class="nav-link">Histórico do Ranking</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+            <a href="https://sites.google.com/view/growar/wg"  target="_blank" class="nav-link">Regras</a>
     </li>
     }
     else if (User.Identity.GetRole() == "Administrador"){
@@ -33,6 +36,11 @@
     }
 </ul>
 <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="/" role="button">
+            <i class="fas fa-home"></i>
+        </a>
+    </li>
         @if (User.Identity.GetRole() == "Usuario_Comum")
     {
         <li class="nav-item">
