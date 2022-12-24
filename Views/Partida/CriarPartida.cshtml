@@ -2,9 +2,9 @@
 @model PartidaModels;
 @{
     TempData["LinkSessao"] = "";
-    TempData["Sessao"] = "Partida";
-    TempData["Pagina"] = "Criar Partida";
-    ViewData["Title"] = "Partida";
+    TempData["Sessao"] = "Criar Partida";
+    TempData["Pagina"] = "Partidas";
+    ViewData["Title"] = "Criar Partida";
     var Usuarios = ViewData["Usuario"] as List<UsuarioModels>;
 }
 <section class="content">
@@ -14,7 +14,7 @@
             <div class="col-md-8">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Partida</h3>
+                        <h3 class="card-title">Criar Partida</h3>
                     </div>
                     <form asp-controller="Partida" asp-action="SalvarPartida" method="post" id="formPartida">
                         <div class="card-body">

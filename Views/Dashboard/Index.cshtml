@@ -2,7 +2,7 @@
 @{
     TempData["LinkSessao"] = "";
     TempData["Sessao"] = "Painel";
-    TempData["Pagina"] = "Inicio";
+    TempData["Pagina"] = "Painel";
     ViewData["Title"] = "Painel";
 }
 <section class="content">
@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                    <span class="info-box-icon bg-gradient-navy elevation-1"><i class="fas fa-users"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text">Posição no Ranking</span>
@@ -21,7 +21,8 @@
                             }
                             else
                             {
-                                @Model.Posicao
+                                string str = Model.Posicao + "º";
+                                @str;
                             }
                         </span>
                     </div>
@@ -30,7 +31,7 @@
             <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+                    <span class="info-box-icon bg-gradient-navy elevation-1"><i class="fas fa-users"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Pontuação</span>
                         <span class="info-box-number">
@@ -49,7 +50,7 @@
             </div>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-orange elevation-1"><i class="fas fa-users"></i></span>
+                    <span class="info-box-icon bg-gradient-navy elevation-1"><i class="fas fa-users"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text">Jogos</span>
@@ -61,8 +62,8 @@
                             }
                             else
                             {
-                                int i = (@Model.Vitorias + @Model.Derrotas);
-                                @i;
+                                int j = (@Model.Vitorias + @Model.Derrotas);
+                                @j;
                             }
                         </span>
                     </div>
@@ -70,7 +71,7 @@
             </div>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                    <span class="info-box-icon bg-gradient-navy elevation-1"><i class="fas fa-users"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text">Vitórias</span>
@@ -90,7 +91,7 @@
             </div>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
+                    <span class="info-box-icon bg-gradient-navy elevation-1"><i class="fas fa-users"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text">Derrotas</span>
@@ -109,9 +110,87 @@
             </div>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-users"></i></span>
+                    <span class="info-box-icon bg-gradient-navy elevation-1"><i class="fas fa-users"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Desempenho</span>
+                        <span class="info-box-number">
+                            @if (Model == null)
+                            {
+                                @Html.Raw("0")
+                                ;
+                            }
+                            else
+                            {
+                                int d = (@Model.Vitorias * 100 / (@Model.Vitorias + @Model.Derrotas));
+                                string str = d + "%";
+                                @str;
+                            }
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-danger elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <a href="~/criar-partida" aria-label="Criar Partida">Criar Partida</a>
+                    </div>
+                </div>
+            </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-info elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <a href="~/partida" aria-label="Listar Partidas">Listar Partidas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-info elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <a href="~/ranking" aria-label="Ranking">Ranking</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-info elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <a href="~/historico-ranking" aria-label="Histórico de Rankings">Histórico de Rankings</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-users"></i></span>
                     <div class="info-box-content">
                         <a href="https://sites.google.com/view/growar/wg" target="_blank" aria-label="Regras">Regras</a>
+                    </div>
+                </div>
+            </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-gray elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <a href="~/troca-de-tema/1" aria-label="Tema Claro">Tema Claro</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-black elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <a href="~/troca-de-tema/2" aria-label="Tema Escuro">Tema Escuro</a>
+                    </div>
+                </div>
+            </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-gradient-gray-dark elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <a href="~/troca-de-tema/3" aria-label="Tema WG">Tema WG</a>
                     </div>
                 </div>
             </div>
