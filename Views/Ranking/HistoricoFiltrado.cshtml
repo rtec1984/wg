@@ -14,7 +14,7 @@
         <div>
             <div class="container">
                 <div id="grid">
-                    <table class="table" id="ranking">
+                    <table class="table table-bordered" id="ranking">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -35,12 +35,15 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         var table = $('#ranking').DataTable({
+                        language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json'
+            },
             dom: 'Bfrltip',
             pageLength: 10,
             lengthMenu: [10, 50, 100],
             ajax: "@Html.Raw("/Ranking/getHistoricoPorData?data="+Convert.ToDateTime(TempData["Data"]).ToString("MM-dd-yyyy"))",
             buttons: [
-                'csv', 'excel', 'pdf', 'print'
+               'print'
             ],
             order: [[2, 'desc'], [5, 'desc'], [4, 'desc'], [3, 'asc']],
             columnDefs: [

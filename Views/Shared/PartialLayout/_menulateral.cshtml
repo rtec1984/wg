@@ -4,7 +4,51 @@
 {
     <li class="nav-item">
         <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa-gamepad"></i>
+            <p>
+                Partidas
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="~/criar-partida" class="nav-link">
+                    <i class="fas fa-user-edit nav-icon"></i>
+                    <p>Criar Partida</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="~/partida" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i>
+                    <p>Listar Partidas</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-line"></i>
+            <p>
+                Rankings
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="~/ranking" class="nav-link">
+                    <i class="fas fa-chart-line nav-icon"></i>
+                    <p>Ranking</p>
+                </a>
+                <a href="~/historico-ranking" class="nav-link">
+                    <i class="fas fa-history nav-icon"></i>
+                    <p>Histórico de Rankings</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-wrench"></i>
             <p>
                 Temas
                 <i class="right fas fa-angle-left"></i>
@@ -13,69 +57,30 @@
         <ul class="nav nav-treeview">
             <li class="nav-item">
                 <a href="~/troca-de-tema/1" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tema v1</p>
+                    <i class="fas fa-sun"></i>
+                    <p>Tema Claro</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="~/troca-de-tema/2" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tema v2</p>
+                    <i class="fas fa-moon"></i>
+                    <p>Tema Escuro</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="~/troca-de-tema/3" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tema v3</p>
+                    <i class="fas fa-yin-yang"></i>
+                    <p>Tema Yin-Yang</p>
                 </a>
             </li>
         </ul>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-                Partida
-                <i class="right fas fa-angle-left"></i>
-            </p>
+        <a href="https://sites.google.com/view/growar/wg" target="_blank" aria-label="Regras" class="nav-link">
+            <i class="fas fa-exclamation-circle nav-icon"></i>
+            <p>Regras</p>
         </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="~/partida" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Listar Partidas</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="~/criar-partida" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Criar Partida</p>
-                </a>
-            </li>
-        </ul>
     </li>
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-                Ranking
-                <i class="right fas fa-angle-left"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="~/ranking" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ranking</p>
-                </a>
-                <a href="~/historico-ranking" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Histórico do Ranking</p>
-                </a>
-            </li>
-        </ul>
-    </li>
-
 }
 else if (User.Identity.GetRole() == "Administrador")
 {
