@@ -39,15 +39,11 @@ namespace ProjectAmaterasu.Controllers
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 var UsuarioVerificacao = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Apelido = @Apelido", new { apelido = usuario.Apelido }).FirstOrDefault();
-
-                if (UsuarioVerificacao == null && usuario.Nome.Split(' ').Count() > 1)
-                {
-                    usuario.Nome = usuario.Nome.Split(' ')[0] + " " + usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1];
-
+                var nome = char.ToUpper(usuario.Nome.Split(' ')[0][0]) + usuario.Nome.Split(' ')[0].Substring(1).ToLower();
+                var sobrenome = char.ToUpper(usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1][0]) + usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1].Substring(1).ToLower();
+                    usuario.Nome = nome + " " + sobrenome;
                     connection.Execute("UPDATE Usuario SET Nome = @Nome, Apelido = @Apelido WHERE Id = @Id", new { usuario.Nome, Id = User.Identity.GetSessionID(), Apelido = usuario.Apelido });
-
-                    _ = User.AddUpdateClaimAsync("Name", usuario.Nome);
-                }
+                _ = User.AddUpdateClaimAsync("Name", usuario.Nome);
 
                 return Redirect("~/perfil");
             }
