@@ -7,6 +7,19 @@
 <style>
     table.dataTable tbody tr {
         background-color: unset !important;
+        text-align: center !important;
+    }
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc {
+        background: none !important;
+        text-align: center !important;
+    }
+    div.dt-buttons {
+        float: left !important;
+    }
+    .content-header {
+        padding: 5px !important;
     }
 </style>
 <section class="content">
@@ -17,7 +30,7 @@
                     <table class="table table-bordered" id="ranking">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col" aria-label="#" class="sorting_disabled" rowspan="1" colspan="1" style="display: flex;justify-content: center;">#</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">P</th>
                                 <th scope="col">J</th>
@@ -40,7 +53,7 @@
             },
             dom: 'Bfrltip',
             pageLength: 10,
-            lengthMenu: [10, 50, 100],
+            lengthMenu: [10, 25, 50, 100],
             ajax: "@Html.Raw("/Ranking/getHistoricoPorData?data="+Convert.ToDateTime(TempData["Data"]).ToString("MM-dd-yyyy"))",
             buttons: [
                'print'

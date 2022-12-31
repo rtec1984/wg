@@ -13,8 +13,13 @@
             {
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="card card-success collapsed-card">
-                        <div class="card-header" style="background-color: #343a40;">
-                            <h3 class="card-title">Partida @item.Id - @item.Data.ToString("dd/MM/yyyy")<br>Duração: @Html.Raw(item.Duracao +" minutos")</h3>
+                        <div class="card-header" style="background-color: #343a40; margin: 2px!important;">
+                            <h3 class="card-title" style="display: flex;flex-direction: column;">
+                                <i class="fas fa-gamepad" style="margin-bottom: 5px;">&emsp;Partida @item.Id</i>
+                                <i class="fas fa-calendar" style="margin-bottom: 5px;">&emsp; @item.Data.ToString("dd/MM/yyyy")</i>
+                                <i class="fas fa-clock" style="margin-bottom: 5px;">&emsp; @Html.Raw(item.Duracao +" minutos")</i>
+                                <i class="fas fa-trophy">&emsp;@Html.Raw(item.Nome)</i>
+                            </h3>
                             <div class="card-tools">
                                 @if (item.Id_Usuario == User.Identity.GetSessionID() && item.Data.AddDays(2) >= DateTime.Now)
                                 {
@@ -31,20 +36,19 @@
                             </div>
                         </div>
                         <div class="card-body" style="display: none;">
-                            <p style="color: green; margin-bottom: 2px!important;"><i class="bi bi-check-circle-fill"></i> @Html.Raw(item.Nome)</p>
-                            <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_2)</p>
-                            <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_3)</p>
+                            <p style="color: #343a40; margin-bottom: 2px!important;"><i class="fas fa-user"></i>&emsp;@Html.Raw(item.Nome_2)</p>
+                            <p style="color: #343a40; margin-bottom: 2px!important;"><i class="fas fa-user"></i>&emsp;@Html.Raw(item.Nome_3)</p>
                             @if (!String.IsNullOrEmpty(item.Nome_4))
                             {
-                                <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_4)</p>
+                                <p style="color: #343a40; margin-bottom: 2px!important;"><i class="fas fa-user"></i>&emsp;@Html.Raw(item.Nome_4)</p>
                             }
                             @if (!String.IsNullOrEmpty(item.Nome_5))
                             {
-                                <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_5)</p>
+                                <p style="color: #343a40; margin-bottom: 2px!important;"><i class="fas fa-user"></i>&emsp;@Html.Raw(item.Nome_5)</p>
                             }
                             @if (!String.IsNullOrEmpty(item.Nome_6))
                             {
-                                <p style="color: red; margin-bottom: 2px!important;"><i class="bi bi-x-circle-fill"></i> @Html.Raw(item.Nome_6)</p>
+                                <p style="color: #343a40; margin-bottom: 2px!important;"><i class="fas fa-user"></i>&emsp;@Html.Raw(item.Nome_6)</p>
                             }
                         </div>
                     </div>

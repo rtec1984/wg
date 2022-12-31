@@ -50,7 +50,7 @@ namespace ProjectAmaterasu.Controllers
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 var Partida = connection.Query<PartidaModels>(@"SELECT * FROM Partida WHERE Id = @Id AND Id_Usuario = @Id_Usuario", new { Id = id, Id_Usuario = User.Identity.GetSessionID() }).FirstOrDefault();
-                var Usuario = connection.Query<UsuarioModels>(@"SELECT Id, Nome, Apelido FROM Usuario").ToList();
+                var Usuario = connection.Query<UsuarioModels>(@"SELECT Id, Nome, Apelido FROM Usuario").OrderBy(x => x.Nome).ToList();
                 ViewData["Usuario"] = Usuario;
                 if (Partida != null)
                 {
