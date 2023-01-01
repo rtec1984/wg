@@ -1,48 +1,105 @@
-﻿@{
+﻿@using ProjectAmaterasu.Extensions
+
+@{
     TempData["LinkSessao"] = "";
     TempData["Sessao"] = "Painel";
     TempData["Pagina"] = "Ranking";
-    ViewData["Title"] = "Histórico Ranking";
+    ViewData["Title"] = "Ranking " + Convert.ToDateTime(TempData["Data"]).ToString("MM-yyyy");
 }
-<style>
-    table.dataTable tbody tr {
-        background-color: unset !important;
-        text-align: center !important;
-    }
-    table.dataTable thead .sorting,
-    table.dataTable thead .sorting_asc,
-    table.dataTable thead .sorting_desc {
-        background: none !important;
-        text-align: center !important;
-    }
-    div.dt-buttons {
-        float: left !important;
-    }
-    .content-header {
-        padding: 5px !important;
-    }
-</style>
 <section class="content">
-    <div class="container-fluid">
-        <div>
-            <div class="container">
-                <div id="grid">
-                    <table class="table table-bordered" id="ranking">
-                        <thead>
-                            <tr>
-                                <th scope="col" aria-label="#" class="sorting_disabled" rowspan="1" colspan="1" style="display: flex;justify-content: center;">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">P</th>
-                                <th scope="col">J</th>
-                                <th scope="col">V</th>
-                                <th scope="col">%</th>
-                            </tr>
-                        </thead>
-                    </table>
+     @if (User.Identity.GetTema() == "1")
+    {
+        <style>
+            table.dataTable tbody tr {
+            text-align: center !important;
+            }
+
+            table.dataTable thead .sorting,
+            table.dataTable thead .sorting_asc,
+            table.dataTable thead .sorting_desc {
+            background: none !important;
+            text-align: center !important;
+            }
+
+            button.dt-button:first-child, div.dt-button:first-child, a.dt-button:first-child, input.dt-button:first-child {
+                margin-left: 0;
+                float: left !important;
+            }
+
+            .content-header {
+            padding: 5px !important;
+            }
+        </style>
+        <div class="container-fluid">
+            <div>
+                <div class="container">
+                    <div id="grid">
+                        <table class="table table-bordered table-striped" id="ranking">
+                            <thead>
+                                <tr>
+                                    <th scope="col" aria-label="#" class="sorting_disabled" rowspan="1" colspan="1" style="display: flex;justify-content: center;">#</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">P</th>
+                                    <th scope="col">J</th>
+                                    <th scope="col">V</th>
+                                    <th scope="col">%</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+    else if (User.Identity.GetTema() == "2" || User.Identity.GetTema() == "3")
+    {
+        <style>
+            table.dataTable tbody tr {
+            text-align: center !important;
+            color: white !important;
+            background-color: #212529;
+            }
+            table.dataTable thead .sorting,
+            table.dataTable thead .sorting_asc,
+            table.dataTable thead .sorting_desc {
+            background: none !important;
+            text-align: center !important;
+            }
+
+            button.dt-button:first-child, div.dt-button:first-child, a.dt-button:first-child, input.dt-button:first-child {
+                margin-left: 0;
+                float: left !important;
+            }
+
+            .content-header {
+            padding: 5px !important;
+            }
+
+            .paginate_button.disabled, .dataTables_wrapper .dataTables_length, .dataTables_paginate, button.dt-button, div.dt-button, a.dt-button, input.dt-button, .paginate_button.current, .dataTables_filter, .dataTables_info, .dataTables_processing {
+            color: unset !important;
+            }
+        </style>
+        <div class="container-fluid">
+            <div>
+                <div class="container">
+                    <div id="grid">
+                        <table class="table table-bordered table-striped table-dark" id="ranking">
+                            <thead>
+                                <tr>
+                                    <th scope="col" aria-label="#" class="sorting_disabled" rowspan="1" colspan="1" style="display: flex;justify-content: center;">#</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">P</th>
+                                    <th scope="col">J</th>
+                                    <th scope="col">V</th>
+                                    <th scope="col">%</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
 </section>
 
 <script>
@@ -53,10 +110,19 @@
             },
             dom: 'Bfrltip',
             pageLength: 10,
-            lengthMenu: [10, 25, 50, 100],
+            lengthMenu: [3, 5, 10, 15, 20, 25, 50, 100],
             ajax: "@Html.Raw("/Ranking/getHistoricoPorData?data="+Convert.ToDateTime(TempData["Data"]).ToString("MM-dd-yyyy"))",
             buttons: [
-               'print'
+                {
+                    extend: 'pdfHtml5',
+                    pageSize: 'B7',
+                    messageBottom: function () { return "\n" + "Em " + new Date().toLocaleDateString() + " às " + new Date().toLocaleTimeString() },
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                }
             ],
             order: [[2, 'desc'], [5, 'desc'], [4, 'desc'], [3, 'asc']],
             columnDefs: [

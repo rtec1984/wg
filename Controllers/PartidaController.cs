@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ProjectAmaterasu.Extensions;
 using ProjectAmaterasu.Models;
+using System;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -83,12 +84,17 @@ namespace ProjectAmaterasu.Controllers
 
                     return Redirect("~/partida");
                 }
-                else
+                else if (partida.Data.AddMonths(1) > DateTime.Now && partida.Data <= DateTime.Now)
                 {
                     connection.Execute(@"INSERT INTO Partida (Id_Usuario, Id_Usuario_2, Id_Usuario_3, Id_Usuario_4, Id_Usuario_5, Id_Usuario_6, Data, Duracao, Pontuacao) 
                                          VALUES (@Id_Usuario, @Id_Usuario_2, @Id_Usuario_3, @Id_Usuario_4, @Id_Usuario_5, @Id_Usuario_6, @Data, @Duracao, @Pontuacao)", partida);
 
                     return Redirect("~/partida");
+                }
+                else
+                {
+                    return Redirect("~/partida");
+
                 }
             }
         }
