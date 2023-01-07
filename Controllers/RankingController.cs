@@ -28,6 +28,13 @@ namespace ProjectAmaterasu.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Usuario_Comum")]
+        [Route("ranking-historico-sistema-antigo")]
+        public IActionResult HistoricoAntigo()
+        {
+            return View();
+        }
+
         public JsonResult getRankings()
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))

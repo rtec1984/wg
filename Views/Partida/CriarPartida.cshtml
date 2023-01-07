@@ -102,11 +102,11 @@
                             <div class="row" style="margin-top: 20px">
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1">Hora de Início</label>
-                                    <input type="datetime-local" id="Comeco" class="form-control" />
+                                    <input type="datetime-local" id="Comeco" name="Comeco" class="form-control" />
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1">Hora de Término</label>
-                                    <input type="datetime-local" id="Termino" class="form-control" />
+                                    <input type="datetime-local" id="Termino" name="Termino" class="form-control" />
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1">Duração da Partida</label>
@@ -166,6 +166,12 @@
                 Id_Usuario_3: {
                     required: true,
                 },
+                Comeco: {
+                    required: true,
+                },
+                Termino: {
+                    required: true,
+                },
                 Data: {
                     required: true,
                 },
@@ -175,6 +181,12 @@
                     required: "Esse campo é obrigatório",
                 },
                 Id_Usuario_3: {
+                    required: "Esse campo é obrigatório",
+                },
+                Comeco: {
+                    required: "Esse campo é obrigatório",
+                },
+                Termino: {
                     required: "Esse campo é obrigatório",
                 },
                 Data: {
