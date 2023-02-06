@@ -60,7 +60,7 @@ namespace ProjectAmaterasu.Controllers
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
-                var usuario = connection.Query<UsuarioViewModels>(@"SELECT DISTINCT Data FROM Historico").ToList();
+                var usuario = connection.Query<UsuarioViewModels>(@"SELECT DISTINCT Data FROM Historico").OrderByDescending(x => x.Data).ToList();
 
                 return View(usuario);
             }
