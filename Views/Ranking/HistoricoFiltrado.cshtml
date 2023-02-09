@@ -4,9 +4,9 @@
     TempData["LinkSessao"] = "";
     TempData["Sessao"] = "Painel";
     TempData["Pagina"] = "Ranking";
-    ViewData["Title"] = Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper();
+    ViewData["Title"] = Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("DECEMBER", "DEZEMBRO");
 }
-<p style="margin-left: 7rem;">@Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper())</p>
+<p style="margin-left: 7rem;">@Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("DECEMBER", "DEZEMBRO"))</p>
 <section class="content">
      @if (User.Identity.GetTema() == "1")
     {
