@@ -11,7 +11,7 @@
                 <option value="">Selecione</option>
                 @foreach (var item in Model)
                 {
-                    <option value="/historico-ranking/@item.Data.ToString("MM-dd-yyyy")">@item.Data.ToString("MM/yyyy")</option>
+                    <option value="/historico-ranking/@item.Data.ToString("MM-dd-yyyy")">@item.Data.ToString("MMMM/yyyy").ToUpper()</option>
                 }
             </select>
         </div>
@@ -32,7 +32,7 @@
     <div class="row" style="display: flex; justify-content: center;">
         <div class="col-md-4">
             <br>
-            <h4>Ranking Final de Novembro de 2022</h4>
+            <h4>Novembro de 2022</h4>
             <table class="table table-bordered table-striped table-hover table-light" id="novembro22">
                 <thead>
                     <tr>
@@ -112,7 +112,7 @@
                 </tbody>
             </table>
             <br>
-                        <h4>Ranking Final de Outubro de 2022</h4>
+                        <h4>Outubro de 2022</h4>
             <table class="table table-bordered table-striped table-hover table-light" id="outubro22">
                 <thead>
                     <tr>
@@ -224,7 +224,7 @@
                 </tbody>
             </table>
             <br>
-                        <h4>Ranking Final de Setembro de 2022</h4>
+                        <h4>Setembro de 2022</h4>
             <table class="table table-bordered table-striped table-hover table-light" id="setembro22">
                 <thead>
                     <tr>
@@ -320,7 +320,7 @@
                 </tbody>
             </table>
             <br>
-            <h4>Ranking Final de Agosto de 2022</h4>
+            <h4>Agosto de 2022</h4>
             <table class="table table-bordered table-striped table-hover table-light" id="agosto22">
                 <thead>
                     <tr>
@@ -416,7 +416,7 @@
                 </tbody>
             </table>
             <br>
-            <h4>Ranking Final de Julho de 2022</h4>
+            <h4>Julho de 2022</h4>
             <table class="table table-bordered table-striped table-hover table-light" id="julho22">
                 <thead>
                     <tr>
@@ -512,7 +512,7 @@
                 </tbody>
             </table>
             <br>
-            <h4>Ranking de Janeiro de 2022 à Maio de 2022</h4>
+            <h4>Janeiro de 2022 à Maio de 2022</h4>
             <table class="table table-bordered table-striped table-hover table-light" id="geral2">
                 <thead>
                     <tr>
@@ -608,7 +608,7 @@
                 </tbody>
             </table>
             <br>
-            <h4>Ranking de Outubro de 2019 à Dezembro de 2021</h4>
+            <h4>Outubro de 2019 à Dezembro de 2021</h4>
             <table class="table table-bordered table-striped table-hover table-light" id="geral">
                 <thead>
                     <tr>

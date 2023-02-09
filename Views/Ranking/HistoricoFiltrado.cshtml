@@ -4,8 +4,9 @@
     TempData["LinkSessao"] = "";
     TempData["Sessao"] = "Painel";
     TempData["Pagina"] = "Ranking";
-    ViewData["Title"] = "Ranking " + Convert.ToDateTime(TempData["Data"]).ToString("MM-yyyy");
+    ViewData["Title"] = Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper();
 }
+<p style="margin-left: 7rem;">@Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper())</p>
 <section class="content">
      @if (User.Identity.GetTema() == "1")
     {
