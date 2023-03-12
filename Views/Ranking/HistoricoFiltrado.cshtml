@@ -4,9 +4,33 @@
     TempData["LinkSessao"] = "";
     TempData["Sessao"] = "Painel";
     TempData["Pagina"] = "Ranking";
-    ViewData["Title"] = Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("DECEMBER", "DEZEMBRO");
+    ViewData["Title"] = Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper()
+    .Replace("JANUARY", "JANEIRO")
+    .Replace("FEBRUARY", "FEVEREIRO")
+    .Replace("MARCH", "MARÇO")
+    .Replace("APRIL", "ABRIL")
+    .Replace("MAY", "MAIO")
+    .Replace("JUNE", "JUNHO")
+    .Replace("JULY", "JULHO")
+    .Replace("AUGUST", "AGOSTO")
+    .Replace("SEPTEMBER", "SETEMBRO")
+    .Replace("OCTOBER", "OUTUBRO")
+    .Replace("NOVEMBER", "NOVEMBRO")
+    .Replace("DECEMBER", "DEZEMBRO");
 }
-<p style="margin-left: 7rem;">@Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("DECEMBER", "DEZEMBRO"))</p>
+<p style="margin-left: 7rem;">@Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper()
+    .Replace("JANUARY", "JANEIRO")
+    .Replace("FEBRUARY", "FEVEREIRO")
+    .Replace("MARCH", "MARÇO")
+    .Replace("APRIL", "ABRIL")
+    .Replace("MAY", "MAIO")
+    .Replace("JUNE", "JUNHO")
+    .Replace("JULY", "JULHO")
+    .Replace("AUGUST", "AGOSTO")
+    .Replace("SEPTEMBER", "SETEMBRO")
+    .Replace("OCTOBER", "OUTUBRO")
+    .Replace("NOVEMBER", "NOVEMBRO")
+    .Replace("DECEMBER", "DEZEMBRO"))</p>
 <section class="content">
      @if (User.Identity.GetTema() == "1")
     {
