@@ -11,7 +11,20 @@
                 <option value="">Selecione</option>
                 @foreach (var item in Model)
                 {
-                    <option value="/historico-ranking/@item.Data.ToString("MM-dd-yyyy")">@item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("DECEMBER", "DEZEMBRO")</option>
+                    <option value="/historico-ranking/@item.Data.ToString("MM-dd-yyyy")">@item.Data.ToString("MMMM/yyyy").ToUpper()
+                        .Replace("JANUARY", "JANEIRO")
+                        .Replace("FEBRUARY", "FEVEREIRO")
+                        .Replace("MARCH", "MARÇO")
+                        .Replace("APRIL", "ABRIL")
+                        .Replace("MAY", "MAIO")
+                        .Replace("JUNE", "JUNHO")
+                        .Replace("JULY", "JULHO")
+                        .Replace("AUGUST", "AGOSTO")
+                        .Replace("SEPTEMBER", "SETEMBRO")
+                        .Replace("OCTOBER", "OUTUBRO")
+                        .Replace("NOVEMBER", "NOVEMBRO")
+                        .Replace("DECEMBER", "DEZEMBRO")
+                    </option>
                 }
             </select>
         </div>
