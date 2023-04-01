@@ -222,7 +222,7 @@ namespace ProjectAmaterasu.Controllers
                 var propriedadesDeAutenticacao = new AuthenticationProperties
                 {
                     AllowRefresh = true,
-                    ExpiresUtc = DateTime.Now.ToLocalTime().AddDays(9999),
+                    ExpiresUtc = DateTime.Now.ToLocalTime().AddDays(3),
                     IsPersistent = true
                 };
 
