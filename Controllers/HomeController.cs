@@ -28,6 +28,7 @@ namespace ProjectAmaterasu.Controllers
         }
         #endregion
 
+        [Route("regras")]
         public IActionResult Index()
         {
             return View();

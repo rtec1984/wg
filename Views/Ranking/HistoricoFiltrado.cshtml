@@ -16,7 +16,9 @@
     .Replace("SEPTEMBER", "SETEMBRO")
     .Replace("OCTOBER", "OUTUBRO")
     .Replace("NOVEMBER", "NOVEMBRO")
-    .Replace("DECEMBER", "DEZEMBRO");
+    .Replace("DECEMBER", "DEZEMBRO")
+    .Replace("DEZEMBRO/2021", "OUTUBRO/2019 - DEZEMBRO/2021")
+    .Replace("MAIO/2022", "JANEIRO/2022 - MAIO/2022");
 }
 <p style="margin-left: 7rem;">@Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper()
     .Replace("JANUARY", "JANEIRO")
@@ -30,7 +32,10 @@
     .Replace("SEPTEMBER", "SETEMBRO")
     .Replace("OCTOBER", "OUTUBRO")
     .Replace("NOVEMBER", "NOVEMBRO")
-    .Replace("DECEMBER", "DEZEMBRO"))</p>
+    .Replace("DECEMBER", "DEZEMBRO")
+    .Replace("DEZEMBRO/2021", "OUTUBRO/2019 - DEZEMBRO/2021")
+    .Replace("MAIO/2022", "JANEIRO/2022 - MAIO/2022"))
+</p>
 <section class="content">
      @if (User.Identity.GetTema() == "1")
     {

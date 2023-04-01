@@ -54,7 +54,7 @@ namespace ProjectAmaterasu.Controllers
 
 
         [Authorize(Roles = "Usuario_Comum")]
-        [Route("historico-ranking")]
+        [Route("historico")]
         public IActionResult Historico()
 
         {
@@ -67,7 +67,7 @@ namespace ProjectAmaterasu.Controllers
         }
 
         [Authorize(Roles = "Usuario_Comum")]
-        [Route("historico-ranking/{data}")]
+        [Route("historico/{data}")]
         public IActionResult HistoricoFiltrado(DateTime data)
         {
 
