@@ -26,9 +26,11 @@
             margin-left: 0;
             float: left !important;
         }
-
         .paginate_button.disabled, .dataTables_wrapper .dataTables_length, .dataTables_paginate, button.dt-button, div.dt-button, a.dt-button, input.dt-button, .paginate_button.current, .dataTables_filter, .dataTables_info, .dataTables_processing {
             color: unset !important;
+        }
+        .dt-buttons {
+            display: none;
         }
     </style>
     <div class="container">
@@ -162,14 +164,11 @@ else if (User.Identity.GetTema() == "2" || User.Identity.GetTema() == "3")
             color: white !important;
             background-color: #212529;
         }
-
-        button.dt-button:first-child, div.dt-button:first-child, a.dt-button:first-child, input.dt-button:first-child {
-            margin-left: 0;
-            float: left !important;
-        }
-
         .paginate_button.disabled, .dataTables_wrapper .dataTables_length, .dataTables_paginate, button.dt-button, div.dt-button, a.dt-button, input.dt-button, .paginate_button.current, .dataTables_filter, .dataTables_info, .dataTables_processing {
             color: unset !important;
+        }
+        .dt-buttons {
+            display: none;
         }
     </style>
     <div class="container">
@@ -309,19 +308,6 @@ else if (User.Identity.GetTema() == "2" || User.Identity.GetTema() == "3")
             dom: 'Bfrltip',
             pageLength: 10,
             lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "Todos"]],
-            buttons: [
-                {
-                    extend: 'pdfHtml5',
-                    title: 'Campeões Mensais',
-                    pageSize: 'B7',
-                    messageBottom: function () { return "\n" + "Em " + new Date().toLocaleDateString() + " às " + new Date().toLocaleTimeString() },
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
-                }
-            ],
             order: [0, 'desc'],
             columnDefs: [
                 {
