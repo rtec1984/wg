@@ -12,7 +12,7 @@
                 @foreach (var item in Model)
                 {
                     <option value="/historico/@item.Data.ToString("MM-dd-yyyy")">
-                        @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO").Replace("DEZEMBRO/2021", "OUT/19 - DEZ/21").Replace("MAIO/2022", "JAN/22 - MAI/22")
+                        @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO")
                     </option>
                 }
             </select>
@@ -132,27 +132,8 @@
                             <td>5</td>
                             <td>71</td>
                         </tr>
-                        <tr>
-                            <td scropt="row">2</td>
-                            <td>JAN/22 - MAI/22</td>
-                            <td>Paulo Santos</td>
-                            <td>232</td>
-                            <td>146</td>
-                            <td>53</td>
-                            <td>36</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">1</td>
-                            <td>OUT/19 - DEZ/21</td>
-                            <td>Paulo Santos</td>
-                            <td>1533</td>
-                            <td>2273</td>
-                            <td>526</td>
-                            <td>23</td>
-                        </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
@@ -270,27 +251,8 @@ else if (User.Identity.GetTema() == "2" || User.Identity.GetTema() == "3")
                             <td>5</td>
                             <td>71</td>
                         </tr>
-                        <tr>
-                            <td scropt="row">2</td>
-                            <td>JAN/22 - MAI/22</td>
-                            <td>Paulo Santos</td>
-                            <td>232</td>
-                            <td>146</td>
-                            <td>53</td>
-                            <td>36</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">1</td>
-                            <td>OUT/19 -DEZ/21</td>
-                            <td>Paulo Santos</td>
-                            <td>1533</td>
-                            <td>2273</td>
-                            <td>526</td>
-                            <td>23</td>
-                        </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
