@@ -3,6 +3,24 @@
 @{
     ViewData["Title"] = "Histórico";
 }
+<div class="row" style="display: flex; align-items: center; flex-direction: column;">
+    <div class="col-auto">
+        <label class="control-label text-center" for="Rankings">Histórico</label>
+        <div class="button dropdown" style="float: right; margin-left: 10px;">
+            <select for="Data " name="Data" id="Data" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                <option value="">Selecione</option>
+                @foreach (var item in Model)
+                {
+                    <option value="/historico/@item.Data.ToString("MM-dd-yyyy")">
+                        @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO")
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<br />
+<p style=" text-align: center;font-weight: bolder;">CAMPEÕES POR PERÍODO</p>
 @if (User.Identity.GetTema() == "1")
 {
     <style>
@@ -25,22 +43,6 @@
             text-align: center !important;
         }
     </style>
-    <div class="row" style="display: flex; align-items: center; flex-direction: column;">
-        <div class="col-auto">
-            <label class="control-label text-center" for="Rankings">Histórico</label>
-            <div class="button dropdown" style="float: right; margin-left: 10px;">
-                <select for="Data " name="Data" id="Data" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                    <option value="">Selecione</option>
-                    @foreach (var item in Model)
-                    {
-                        <option value="/historico/@item.Data.ToString("MM-dd-yyyy")">
-                            @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO")
-                        </option>
-                    }
-                </select>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid">
         <div>
             <div class="container">
@@ -86,22 +88,6 @@ else if (User.Identity.GetTema() == "2")
             text-align: center !important;
         }
     </style>
-    <div class="row" style="display: flex; align-items: center; flex-direction: column;">
-        <div class="col-auto">
-            <label class="control-label text-center" for="Rankings">Histórico</label>
-            <div class="button dropdown" style="float: right; margin-left: 10px;">
-                <select for="Data " name="Data" id="Data" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                    <option value="">Selecione</option>
-                    @foreach (var item in Model)
-                    {
-                        <option value="/historico/@item.Data.ToString("MM-dd-yyyy")">
-                            @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO")
-                        </option>
-                    }
-                </select>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid">
         <div>
             <div class="container">
