@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using ProjectAmaterasu.Extensions;
 using ProjectAmaterasu.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -46,7 +47,7 @@ namespace ProjectAmaterasu.Controllers
                     vitorias = x.Vitorias,
                     jogos = x.Vitorias + x.Derrotas,
                     derrotas = x.Derrotas,
-                    pontuacao = x.Pontuacao * x.Vitorias/(x.Vitorias + x.Derrotas),
+                    pontuacao = x.Pontuacao * x.Vitorias / (x.Vitorias + x.Derrotas),
                 }).Distinct().ToList();
                 return Json(new { data = usuario });
             }
@@ -91,6 +92,63 @@ namespace ProjectAmaterasu.Controllers
                 }).ToList();
 
                 return Json(new { data = historico });
+            }
+        }
+
+        public JsonResult getCampeoes()
+        {
+            using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            {
+                var datas = connection.Query<HistoricoModels>(@"SELECT DISTINCT Data FROM Historico").ToList();
+
+
+                var historico = connection.Query<HistoricoModels>(@"SELECT * FROM Historico").Select(x => new
+                {
+                    id = x.Id,
+                    nome = x.Nome_Usuario,
+                    vitorias = x.Vitorias,
+                    jogos = x.Jogos,
+                    derrotas = x.Derrotas,
+                    pontuacao = x.Pontuacao * x.Vitorias / (x.Vitorias + x.Derrotas),
+                    desempenho = x.Desempenho,
+                    data = x.Data
+                }).ToList();
+
+                var lista = new List<HistoricoModels>();
+
+                foreach (var item in datas)
+                {
+                    var mensal = historico.Where(x => x.data == item.Data).OrderByDescending(x => x.pontuacao).FirstOrDefault();
+
+                    var campeao = new HistoricoModels()
+                    {
+                        Id = mensal.id,
+                        Nome_Usuario = mensal.nome,
+                        Vitorias = mensal.vitorias,
+                        Jogos = mensal.jogos,
+                        Derrotas = mensal.derrotas,
+                        Pontuacao = mensal.pontuacao,
+                        Desempenho = mensal.desempenho,
+                        Data = mensal.data
+                    };
+
+
+
+                    lista.Add(campeao);
+                }
+                var campeaomensal = lista.Select(x => new
+                {
+                    id = x.Id,
+                    nome = x.Nome_Usuario,
+                    vitorias = x.Vitorias,
+                    jogos = x.Jogos,
+                    derrotas = x.Derrotas,
+                    pontuacao = x.Pontuacao * x.Vitorias / (x.Vitorias + x.Derrotas),
+                    desempenho = x.Desempenho,
+                    data = x.Data.ToString("yyyy/MM").ToUpper()
+                }).ToList();
+
+                return Json(new { data = campeaomensal });
             }
         }
     }

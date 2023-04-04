@@ -18,7 +18,8 @@
     .Replace("NOVEMBER", "NOVEMBRO")
     .Replace("DECEMBER", "DEZEMBRO");
 
-}<p style=" text-align: center;">@Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper()
+}<p style=" text-align: center;font-weight: bolder;">
+    @Html.Raw(Convert.ToDateTime(TempData["Data"]).ToString("MMMM/yyyy").ToUpper()
     .Replace("JANUARY", "JANEIRO")
     .Replace("FEBRUARY", "FEVEREIRO")
     .Replace("MARCH", "MARÇO")
@@ -33,18 +34,21 @@
     .Replace("DECEMBER", "DEZEMBRO"))
 </p>
 <section class="content">
-     @if (User.Identity.GetTema() == "1")
+    @if (User.Identity.GetTema() == "1")
     {
         <style>
+            table.dataTable thead th {
+                text-align: center !important;
+            }
             table.dataTable tbody tr {
-            text-align: center !important;
+                text-align: center !important;
             }
 
             table.dataTable thead .sorting,
             table.dataTable thead .sorting_asc,
             table.dataTable thead .sorting_desc {
-            background: none !important;
-            text-align: center !important;
+                background: none !important;
+                text-align: center !important;
             }
 
             button.dt-button:first-child, div.dt-button:first-child, a.dt-button:first-child, input.dt-button:first-child {
@@ -53,7 +57,7 @@
             }
 
             .content-header {
-            padding: 5px !important;
+                padding: 5px !important;
             }
         </style>
         <div class="container-fluid">
@@ -77,19 +81,23 @@
             </div>
         </div>
     }
-    else if (User.Identity.GetTema() == "2" || User.Identity.GetTema() == "3")
+    else if (User.Identity.GetTema() == "2")
     {
         <style>
-            table.dataTable tbody tr {
-            text-align: center !important;
-            color: white !important;
-            background-color: #212529;
+            table.dataTable thead th {
+                text-align: center !important;
             }
+            table.dataTable tbody tr {
+                text-align: center !important;
+                color: white !important;
+                background-color: #212529;
+            }
+
             table.dataTable thead .sorting,
             table.dataTable thead .sorting_asc,
             table.dataTable thead .sorting_desc {
-            background: none !important;
-            text-align: center !important;
+                background: none !important;
+                text-align: center !important;
             }
 
             button.dt-button:first-child, div.dt-button:first-child, a.dt-button:first-child, input.dt-button:first-child {
@@ -98,11 +106,11 @@
             }
 
             .content-header {
-            padding: 5px !important;
+                padding: 5px !important;
             }
 
             .paginate_button.disabled, .dataTables_wrapper .dataTables_length, .dataTables_paginate, button.dt-button, div.dt-button, a.dt-button, input.dt-button, .paginate_button.current, .dataTables_filter, .dataTables_info, .dataTables_processing {
-            color: unset !important;
+                color: unset !important;
             }
         </style>
         <div class="container-fluid">
@@ -125,13 +133,13 @@
                 </div>
             </div>
         </div>
-        }
+    }
 </section>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         var table = $('#ranking').DataTable({
-                        language: {
+            language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json'
             },
             dom: 'Bfrltip',

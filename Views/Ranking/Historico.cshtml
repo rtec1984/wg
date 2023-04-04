@@ -3,256 +3,122 @@
 @{
     ViewData["Title"] = "Histórico";
 }
-<div class="row" style="display: flex; align-items: center; flex-direction: column;">
-    <div class="col-auto">
-        <label class="control-label text-center" for="Rankings">Histórico</label>
-        <div class="button dropdown" style="float: right; margin-left: 10px;">
-            <select for="Data " name="Data" id="Data" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                <option value="">Selecione</option>
-                @foreach (var item in Model)
-                {
-                    <option value="/historico/@item.Data.ToString("MM-dd-yyyy")">
-                        @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO")
-                    </option>
-                }
-            </select>
-        </div>
-    </div>
-</div>
 @if (User.Identity.GetTema() == "1")
 {
     <style>
-        button.dt-button:first-child, div.dt-button:first-child, a.dt-button:first-child, input.dt-button:first-child {
-            margin-left: 0;
-            float: left !important;
-        }
-        .paginate_button.disabled, .dataTables_wrapper .dataTables_length, .dataTables_paginate, button.dt-button, div.dt-button, a.dt-button, input.dt-button, .paginate_button.current, .dataTables_filter, .dataTables_info, .dataTables_processing {
-            color: unset !important;
-        }
         .dt-buttons {
             display: none;
         }
+
+        table.dataTable thead th {
+            text-align: center !important;
+        }
+
+        table.dataTable tbody tr {
+            text-align: center !important;
+        }
+
+        table.dataTable thead .sorting,
+        table.dataTable thead .sorting_asc,
+        table.dataTable thead .sorting_desc {
+            background: none !important;
+            text-align: center !important;
+        }
     </style>
-    <div class="container">
-        <div class="row" style="display: flex; justify-content: center;">
-            <div class="col-md-8">
-                <br>
-                <p style=" text-align: center;">CAMPEÕES POR PERÍODO</p>
-                <table class="table table-bordered table-striped table-light" id="mensais">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">MÊS</th>
-                            <th scope="col">NOME</th>
-                            <th scope="col">P</th>
-                            <th scope="col">J</th>
-                            <th scope="col">V</th>
-                            <th scope="col">%</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scropt="row">11</td>
-                            <td>MAR/23</td>
-                            <td>Joel Rocha</td>
-                            <td>121</td>
-                            <td>20</td>
-                            <td>9</td>
-                            <td>45</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">10</td>
-                            <td>FEV/23</td>
-                            <td>Joel Rocha</td>
-                            <td>134</td>
-                            <td>53</td>
-                            <td>14</td>
-                            <td>26</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">9</td>
-                            <td>JAN/23</td>
-                            <td>Barbara Moreira</td>
-                            <td>155</td>
-                            <td>27</td>
-                            <td>12</td>
-                            <td>44</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">8</td>
-                            <td>DEZ/22</td>
-                            <td>Joel Rocha</td>
-                            <td>60</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>60</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">7</td>
-                            <td>NOV/22</td>
-                            <td>Wanderson Roza</td>
-                            <td>27</td>
-                            <td>6</td>
-                            <td>4</td>
-                            <td>67</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">6</td>
-                            <td>OUT/22</td>
-                            <td>Aninha Formiga</td>
-                            <td>33</td>
-                            <td>11</td>
-                            <td>6</td>
-                            <td>55</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">5</td>
-                            <td>SET/22</td>
-                            <td>Aninha Formiga</td>
-                            <td>68</td>
-                            <td>53</td>
-                            <td>19</td>
-                            <td>36</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">4</td>
-                            <td>AGO/22</td>
-                            <td>Thiago Souza</td>
-                            <td>65</td>
-                            <td>7</td>
-                            <td>7</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">3</td>
-                            <td>JUL/22</td>
-                            <td>Levi Francalino</td>
-                            <td>36</td>
-                            <td>7</td>
-                            <td>5</td>
-                            <td>71</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="row" style="display: flex; align-items: center; flex-direction: column;">
+        <div class="col-auto">
+            <label class="control-label text-center" for="Rankings">Histórico</label>
+            <div class="button dropdown" style="float: right; margin-left: 10px;">
+                <select for="Data " name="Data" id="Data" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                    <option value="">Selecione</option>
+                    @foreach (var item in Model)
+                    {
+                        <option value="/historico/@item.Data.ToString("MM-dd-yyyy")">
+                            @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO")
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div>
+            <div class="container">
+                <div id="grid">
+                    <table class="table table-bordered table-striped" id="ranking">
+                        <thead>
+                            <tr>
+                                <th scope="col">DATA</th>
+                                <th scope="col">NOME</th>
+                                <th scope="col">P</th>
+                                <th scope="col">J</th>
+                                <th scope="col">V</th>
+                                <th scope="col">%</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 }
-else if (User.Identity.GetTema() == "2" || User.Identity.GetTema() == "3")
+else if (User.Identity.GetTema() == "2")
 {
     <style>
-        table.dataTable tbody tr {
-            color: white !important;
-            background-color: #212529;
-        }
-        .paginate_button.disabled, .dataTables_wrapper .dataTables_length, .dataTables_paginate, button.dt-button, div.dt-button, a.dt-button, input.dt-button, .paginate_button.current, .dataTables_filter, .dataTables_info, .dataTables_processing {
-            color: unset !important;
-        }
         .dt-buttons {
             display: none;
         }
+
+        table.dataTable thead th {
+            text-align: center !important;
+        }
+
+        table.dataTable tbody tr {
+            text-align: center !important;
+            color: white !important;
+            background-color: #212529;
+        }
+
+        table.dataTable thead .sorting,
+        table.dataTable thead .sorting_asc,
+        table.dataTable thead .sorting_desc {
+            background: none !important;
+            text-align: center !important;
+        }
     </style>
-    <div class="container">
-        <div class="row" style="display: flex; justify-content: center;">
-            <div class="col-md-8">
-                <br>
-                <p style=" text-align: center;">CAMPEÕES POR PERÍODO</p>
-                <table class="table table-bordered table-striped table-dark" id="mensais">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">MÊS</th>
-                            <th scope="col">NOME</th>
-                            <th scope="col">P</th>
-                            <th scope="col">J</th>
-                            <th scope="col">V</th>
-                            <th scope="col">%</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scropt="row">11</td>
-                            <td>MAR/23</td>
-                            <td>Joel Rocha</td>
-                            <td>121</td>
-                            <td>20</td>
-                            <td>9</td>
-                            <td>45</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">10</td>
-                            <td>FEV/23</td>
-                            <td>Joel Rocha</td>
-                            <td>134</td>
-                            <td>53</td>
-                            <td>14</td>
-                            <td>26</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">9</td>
-                            <td>JAN/23</td>
-                            <td>Barbara Moreira</td>
-                            <td>155</td>
-                            <td>27</td>
-                            <td>12</td>
-                            <td>44</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">8</td>
-                            <td>DEZ/22</td>
-                            <td>Joel Rocha</td>
-                            <td>60</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>60</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">7</td>
-                            <td>NOV/22</td>
-                            <td>Wanderson Roza</td>
-                            <td>27</td>
-                            <td>6</td>
-                            <td>4</td>
-                            <td>67</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">6</td>
-                            <td>OUT/22</td>
-                            <td>Aninha Formiga</td>
-                            <td>33</td>
-                            <td>11</td>
-                            <td>6</td>
-                            <td>55</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">5</td>
-                            <td>SET/22</td>
-                            <td>Aninha Formiga</td>
-                            <td>68</td>
-                            <td>53</td>
-                            <td>19</td>
-                            <td>36</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">4</td>
-                            <td>AGO/22</td>
-                            <td>Thiago Souza</td>
-                            <td>65</td>
-                            <td>7</td>
-                            <td>7</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td scropt="row">3</td>
-                            <td>JUL/22</td>
-                            <td>Levi Francalino</td>
-                            <td>36</td>
-                            <td>7</td>
-                            <td>5</td>
-                            <td>71</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="row" style="display: flex; align-items: center; flex-direction: column;">
+        <div class="col-auto">
+            <label class="control-label text-center" for="Rankings">Histórico</label>
+            <div class="button dropdown" style="float: right; margin-left: 10px;">
+                <select for="Data " name="Data" id="Data" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                    <option value="">Selecione</option>
+                    @foreach (var item in Model)
+                    {
+                        <option value="/historico/@item.Data.ToString("MM-dd-yyyy")">
+                            @item.Data.ToString("MMMM/yyyy").ToUpper().Replace("JANUARY", "JANEIRO").Replace("FEBRUARY", "FEVEREIRO").Replace("MARCH", "MARÇO").Replace("APRIL", "ABRIL").Replace("MAY", "MAIO").Replace("JUNE", "JUNHO").Replace("JULY", "JULHO").Replace("AUGUST", "AGOSTO").Replace("SEPTEMBER", "SETEMBRO").Replace("OCTOBER", "OUTUBRO").Replace("NOVEMBER", "NOVEMBRO").Replace("DECEMBER", "DEZEMBRO")
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div>
+            <div class="container">
+                <div id="grid">
+                    <table class="table table-bordered table-striped table-dark" id="ranking">
+                        <thead>
+                            <tr>
+                                <th scope="col">DATA</th>
+                                <th scope="col">NOME</th>
+                                <th scope="col">P</th>
+                                <th scope="col">J</th>
+                                <th scope="col">V</th>
+                                <th scope="col">%</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -261,29 +127,29 @@ else if (User.Identity.GetTema() == "2" || User.Identity.GetTema() == "3")
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script>
-    $("DOMContentLoaded", document).ready(function () {
-        $('#mensais').DataTable({
-            responsive: true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+    document.addEventListener("DOMContentLoaded", () => {
+        var table = $('#ranking').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json'
             },
             dom: 'Bfrltip',
             pageLength: 10,
             lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "Todos"]],
+            ajax: "/Ranking/getCampeoes",
             order: [0, 'desc'],
             columnDefs: [
                 {
                     orderable: false,
-                    targets: [0, 1, 2, 3, 4, 5, 6],
+                    targets: [0, 1, 2, 3, 4, 5],
                 },
-                {
-                    targets: [0],
-                    visible: false,
-                },
-                {
-                    searchable: false,
-                    targets: [0, 1, 3, 4, 5, 6],
-                },
+            ],
+            columns: [
+                { data: 'data' },
+                { data: 'nome' },
+                { data: 'pontuacao' },
+                { data: 'jogos' },
+                { data: 'vitorias' },
+                { data: 'desempenho' },
             ],
         });
     });
