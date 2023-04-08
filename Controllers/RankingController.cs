@@ -143,7 +143,7 @@ namespace ProjectAmaterasu.Controllers
                     vitorias = x.Vitorias,
                     jogos = x.Jogos,
                     derrotas = x.Derrotas,
-                    pontuacao = x.Pontuacao * x.Vitorias / (x.Vitorias + x.Derrotas),
+                    pontuacao = x.Pontuacao,
                     desempenho = x.Desempenho,
                     data = x.Data.ToString("yyyy/MM").ToUpper()
                 }).ToList();

@@ -109,6 +109,17 @@ else if (User.Identity.GetTema() == "2")
         </div>
     </div>
 }
+
+<div>
+    <p style=" text-align: center;font-weight: bolder;">
+        <a class="XqQF9c"
+           href="https://liveestacio-my.sharepoint.com/:x:/g/personal/201607437041_alunos_estacio_br/ER59SZyV6NVCni1oYhQuCf0BPou8257iCpN75SUnzdCitA?e=fikGCL" target="_blank"
+           style="color: inherit; text-decoration: none;">
+            <span class="C9DxTc aw5Odc " style="text-decoration: underline;">Clique aqui para ver todos os registros anteriores.</span>
+        </a>
+    </p>
+</div>
+
 <!-- DataTables -->
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
@@ -119,8 +130,8 @@ else if (User.Identity.GetTema() == "2")
                 url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/pt-BR.json'
             },
             dom: 'Bfrltip',
-            pageLength: 10,
-            lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "Todos"]],
+            pageLength: 6,
+            lengthMenu: [[3, 6, 12, -1], [3, 6, 12, "Todos"]],
             ajax: "/Ranking/getCampeoes",
             order: [0, 'desc'],
             columnDefs: [
