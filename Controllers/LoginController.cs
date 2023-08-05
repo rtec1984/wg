@@ -351,7 +351,7 @@ namespace ProjectAmaterasu.Controllers
                     email.From.Add(MailboxAddress.Parse(SMTP.UsuarioServidor));
                     email.To.Add(MailboxAddress.Parse(Usuario.Email));
                     email.Subject = "Esqueci Minha Senha";
-                    email.Body = new TextPart(TextFormat.Html) { Text = SMTP.CorpoEmail.Replace("{1}", codigoverificacao) };
+                    email.Body = new TextPart(TextFormat.Html) { Text = SMTP.CorpoEmail.Replace("{1}", codigoverificacao).Replace("{2}", Usuario.Nome) };
 
                     using (var smtp = new SmtpClient())
                     {
