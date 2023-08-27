@@ -7,21 +7,31 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-1">
-                <a href="~/Dashboard/BewertungZurucksetzen" onclick="return confirm('Tem certeza que deseja resetar o ranking?');">
-                    <div class="info-box mb-3" style="justify-content: center;background-color: transparent;box-shadow: unset;">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-redo-alt"></i></span>
+            <div class="col-12 col-sm-6 col-md-2">
+                <form id="login-form">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1">
+                            <input type="submit" value="ID" style="background-color: transparent;border-color: transparent;width: 100%;height: 100%;font-weight: bolder;">
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-number">
+                                <input type="text" id="usuario-id" name="usuario-id" style="width: 100%;border: solid;border-color: #FEC107;font-weight: bolder;">
+                            </span>
+                        </div>
                     </div>
-                </a>
+                </form>
             </div>
-        </div>
-    </div>
-    <form id="login-form">
-        <label for="usuario-id">ID do Usuário:</label>
-        <input type="text" id="usuario-id" name="usuario-id">
-        <input type="submit" value="Login como Usuário">
-    </form>
-    <script>
+            <div class="col-12 col-sm-6 col-md-2">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1">
+                        <a href="/Dashboard/BewertungZurucksetzen" onclick="return confirm('Tem certeza que deseja resetar o ranking?');">
+                            <i class="fas fa-redo-alt"></i>
+                        </a>
+                    </span>
+                    <span class="info-box-number" style="display: flex;align-items: center;margin-top: unset;margin-left: 1rem;color: #dc3545;">Resetar Ranking</span>
+                </div>
+            </div>
+            <script>
         document.getElementById("login-form").addEventListener("submit", function (event) {
             event.preventDefault();
             var usuarioId = document.getElementById("usuario-id").value;
