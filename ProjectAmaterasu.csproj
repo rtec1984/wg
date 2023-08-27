@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Dashboard\ListarUsuarios.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove=".dockerignore" />
     <None Remove="Dockerfile" />
   </ItemGroup>

@@ -15,6 +15,8 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using MimeKit.Text;
 using ProjectAmaterasu.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ProjectAmaterasu.Controllers
 {
@@ -476,5 +478,20 @@ namespace ProjectAmaterasu.Controllers
             return Redirect("/");
         }
         #endregion
+
+        #region Acessar Como
+        [Authorize(Roles = "Administrador")]
+        [Route("login-administrador-como-usuario/{usuarioId}")]
+        public IActionResult LoginAdministradorComoUsuario(int usuarioId)
+        {
+            using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            {
+                var Usuario = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Id = @Id", new { Id = usuarioId }).FirstOrDefault();
+                AutenticaUsuario(Usuario);
+                return Redirect("~/painel");
+            }
+        }
+        #endregion
+
     }
 }

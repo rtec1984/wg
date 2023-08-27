@@ -24,11 +24,6 @@
                                     <label for="exampleInputEmail1">Data da Partida</label>
                                     <input type="date" asp-for="Data" class="form-control" />
                                 </div>
-                                @*                                <div class="col-lg-4">
-                                <label for="exampleInputEmail1">Jogador</label>
-                                <input type="text" class="form-control" value="@User.Identity.GetName()" readonly/>
-                                <input type="text" asp-for="Id_Usuario" class="form-control" value="@User.Identity.GetSessionID()" hidden readonly />
-                                </div>*@
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1">Jogador 2</label>
                                     <select asp-for="Id_Usuario_2" id="select_usuario_2" class="form-control id_usuario" style="height: none!important;">
@@ -37,7 +32,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome + " (" + item.Apelido + ")")</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " " + item.Apelido)</option>
                                             }                                       
                                         }
                                     </select>
@@ -51,7 +46,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome + " (" + item.Apelido + ")")</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " " + item.Apelido)</option>
                                             }                                        
                                         }
                                     </select>
@@ -67,7 +62,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome + " (" + item.Apelido + ")")</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " " + item.Apelido)</option>
                                             }
                                         }
                                     </select>
@@ -80,7 +75,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome + " (" + item.Apelido + ")")</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " " + item.Apelido)</option>
                                             }                                        
                                         }
                                     </select>
@@ -93,7 +88,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw(item.Nome + " (" + item.Apelido + ")")</option>
+                                                <option value="@item.Id">@Html.Raw(item.Nome + " " + item.Apelido)</option>
                                             }                                       
                                         }
                                     </select>
