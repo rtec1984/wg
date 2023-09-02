@@ -77,7 +77,7 @@ namespace ProjectAmaterasu.Controllers
                     {
                         TempData["EmailCadastrado"] = Usuario.Email;
                         TempData["ContaExistente"] = "Esta conta se encontra em processo de mudança de senha, verifique o e-mail:<br> " +
-                            "<label id='EmailCadastrado'></label>, para mais instruções ou utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a>";
+                            "<label id='EmailCadastrado'></label>, para mais instruções ou altere sua senha <a href='/esqueci-a-senha'>clicando aqui!</a>";
                         return Redirect("~/login-administrador");
                     }
                     else if (Usuario != null)
@@ -138,7 +138,7 @@ namespace ProjectAmaterasu.Controllers
                     {
                         TempData["EmailCadastrado"] = Usuario.Email;
                         TempData["ContaExistente"] = "Esta conta se encontra em processo de mudança de senha, verifique o e-mail:<br> " +
-                            "<label id='EmailCadastrado'></label>, para mais instruções ou utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a>";
+                            "<label id='EmailCadastrado'></label>, para mais instruções!";
                         return Redirect("/");
                     }
                     else if (Usuario != null)
@@ -310,7 +310,7 @@ namespace ProjectAmaterasu.Controllers
                     }
                     else
                     {
-                        TempData["ContaExistente"] = "Esse e-mail ou apelido já está cadastrado, caso não recorde da senha utilize a função da <a href='/esqueci-a-senha'>esqueci a senha</a>";
+                        TempData["ContaExistente"] = "Esse e-mail ou WhatsApp já está cadastrado, caso não recorde da senha  <a href='/esqueci-a-senha'>clique aqui!</a>";
                     }
                     return Redirect("/");
                 }
@@ -352,7 +352,7 @@ namespace ProjectAmaterasu.Controllers
                     var email = new MimeMessage();
                     email.From.Add(MailboxAddress.Parse(SMTP.UsuarioServidor));
                     email.To.Add(MailboxAddress.Parse(Usuario.Email));
-                    email.Subject = "Esqueci Minha Senha";
+                    email.Subject = "Solicitação de troca de senha.";
                     email.Body = new TextPart(TextFormat.Html) { Text = SMTP.CorpoEmail.Replace("{1}", codigoverificacao).Replace("{2}", Usuario.Nome) };
 
                     using (var smtp = new SmtpClient())
@@ -367,7 +367,7 @@ namespace ProjectAmaterasu.Controllers
                 }
                 else
                 {
-                    TempData["ContaExistente"] = "Email não cadastrado, favor digitar novamente ou avisar o administrador do grupo WAR-GROW";
+                    TempData["ContaExistente"] = "Email não cadastrado, favor digitar novamente ou avisar o administrador do grupo WAR-GROW.";
                 }
             }
 
@@ -447,7 +447,7 @@ namespace ProjectAmaterasu.Controllers
                         var email = new MimeMessage();
                         email.From.Add(MailboxAddress.Parse(SMTP.UsuarioServidor));
                         email.To.Add(MailboxAddress.Parse(mudarsenha.Email));
-                        email.Subject = "Troca de Senha Realizada com Sucesso";
+                        email.Subject = "Troca de senha realizada com sucesso!";
                         email.Body = new TextPart(TextFormat.Html) { Text = SMTP.CorpoEmail };
 
                         using (var smtp = new SmtpClient())

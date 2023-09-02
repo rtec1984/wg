@@ -72,6 +72,11 @@
                     required: "Esse campo é obrigatório",
                 }
             }
+
+        });
+        $('#formPerfil').submit(function () {
+            $(this).find(':submit').attr('disabled', 'disabled');
+            alert("Cadastro alterado com sucesso!");
         });
     });
     
