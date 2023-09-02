@@ -32,7 +32,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw("[" + item.Id  + "] [" + item.Nome + "] [" + item.Apelido + "]")</option>
+                                                <option value="@item.Id">@Html.Raw("[" + item.Nome + "] [" + item.Apelido + "]")</option>
                                             }
                                         }
                                     </select>
@@ -46,7 +46,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw("[" + item.Id  + "] [" + item.Nome + "] [" + item.Apelido + "]")</option>
+                                                <option value="@item.Id">@Html.Raw("[" + item.Nome + "] [" + item.Apelido + "]")</option>
                                             }
                                         }
                                     </select>
@@ -62,7 +62,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw("[" + item.Id  + "] [" + item.Nome + "] [" + item.Apelido + "]")</option>
+                                                <option value="@item.Id">@Html.Raw("[" + item.Nome + "] [" + item.Apelido + "]")</option>
                                             }
                                         }
                                     </select>
@@ -75,7 +75,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw("[" + item.Id  + "] [" + item.Nome + "] [" + item.Apelido + "]")</option>
+                                                <option value="@item.Id">@Html.Raw("[" + item.Nome + "] [" + item.Apelido + "]")</option>
                                             }
                                         }
                                     </select>
@@ -88,7 +88,7 @@
                                         {
                                             @if(item.Id != User.Identity.GetSessionID())
                                             {
-                                                <option value="@item.Id">@Html.Raw("[" + item.Id  + "] [" + item.Nome + "] [" + item.Apelido + "]")</option>
+                                                <option value="@item.Id">@Html.Raw("[" + item.Nome + "] [" + item.Apelido + "]")</option>
                                             }
                                         }
                                     </select>
@@ -223,5 +223,11 @@
              return false;
            }
          });
+
+        $('#formPartida').submit(function () {
+            $(this).find(':submit').attr('disabled', 'disabled');
+            alert("Partida cadastrada com sucesso!");
+        });
+
     });
 </script>

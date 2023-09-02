@@ -479,7 +479,7 @@ namespace ProjectAmaterasu.Controllers
         }
         #endregion
 
-        #region Acessar Como
+        #region Acessar com ID
         [Authorize(Roles = "Administrador")]
         [Route("login-administrador-como-usuario/{usuarioId}")]
         public IActionResult LoginAdministradorComoUsuario(int usuarioId)
@@ -494,4 +494,5 @@ namespace ProjectAmaterasu.Controllers
         #endregion
 
     }
+
 }

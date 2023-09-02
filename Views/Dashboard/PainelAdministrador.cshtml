@@ -7,7 +7,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-2">
+            <div class="col-12 col-sm-6 col-md-4">
                 <form id="login-form">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-warning elevation-1">
@@ -15,13 +15,19 @@
                         </span>
                         <div class="info-box-content">
                             <span class="info-box-number">
-                                <input type="text" id="usuario-id" name="usuario-id" style="width: 100%;border: solid;border-color: #FEC107;font-weight: bolder;">
+                                <select id="usuario-id" name="usuario-id" style="width: 100%;border: solid;border-color: #FEC107;font-weight: bolder;">
+                                    <option value="">Fazer login como...</option>
+                                    @foreach (var item in ViewData["Usuario"] as List<UsuarioModels>)
+                                    {
+                                        <option value="@item.Id">@Html.Raw("[" + item.Id + "] [" + item.Nome + "] [" + item.Apelido + "]")</option>
+                                    }
+                                </select>
                             </span>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-sm-6 col-md-2">
+            <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-danger elevation-1">
                         <a href="/Dashboard/BewertungZurucksetzen" onclick="return confirm('Tem certeza que deseja resetar o ranking?');">
@@ -31,7 +37,9 @@
                     <span class="info-box-number" style="display: flex;align-items: center;margin-top: unset;margin-left: 1rem;color: #dc3545;">Resetar Ranking</span>
                 </div>
             </div>
-            <script>
+        </div>
+    </div>
+    <script>
         document.getElementById("login-form").addEventListener("submit", function (event) {
             event.preventDefault();
             var usuarioId = document.getElementById("usuario-id").value;
@@ -41,5 +49,14 @@
                 alert("Por favor, insira o ID do usuário");
             }
         });
-    </script>    
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            $(document).ready(function () {
+                $("#usuario-id").select2();
+                document.getElementsByTagName("center")[0].style.display = "none"
+            });
+        });
+    </script>
 </section>

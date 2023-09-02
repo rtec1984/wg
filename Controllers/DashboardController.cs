@@ -72,7 +72,13 @@ namespace ProjectAmaterasu.Controllers
         [Route("painel-administrador")]
         public IActionResult PainelAdministrador()
         {
-            return View();
+            using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            {
+                var Usuarios = connection.Query<UsuarioModels>(@"SELECT Id, Nome, Apelido FROM Usuario").OrderBy(x => x.Nome).ToList();
+                ViewData["Usuario"] = Usuarios;
+                return View();
+            }
+
         }
 
         //[Authorize(Roles = "Administrador")]

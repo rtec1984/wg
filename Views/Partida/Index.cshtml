@@ -35,10 +35,10 @@
                                 <div class="card-tools">
                                     @if (item.Id_Usuario == User.Identity.GetSessionID() && item.Data.AddDays(2) >= DateTime.Now)
                                     {
-                                        <a href="~/deletar-partida/@item.Id"  onclick="return confirm('Tem certeza que deseja deletar a partida?');">
+                                        <a href="~/deletar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja deletar a partida?');">
                                             <i class="bi bi-x-circle"></i>
                                         </a>
-                                        <a href="~/alterar-partida/@item.Id">
+                                        <a href="~/alterar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja alterar a partida?');">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     }
@@ -95,7 +95,7 @@
                                         <a href="~/deletar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja deletar a partida?');">
                                             <i class="bi bi-x-circle"></i>
                                         </a>
-                                        <a href="~/alterar-partida/@item.Id">
+                                        <a href="~/alterar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja alterar a partida?');">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     }
