@@ -22,7 +22,7 @@
                                 <i class="bx bxs-user-circle"></i>
                             </div> 
                             <div class="input-wrapper">
-                                <label for="exampleInputEmail1">WhatsApp (+55 11 99999-9999)</label>
+                                <label for="exampleInputEmail1">WhatsApp</label>
                                 <input type="text" asp-for="Apelido" placeholder="Digite seu WhatsApp" class="form-control" maxlength="50" required onchange="this.value = this.value.trim()" />
                                 <i class="bx bxs-user-circle"></i>
                             </div>
@@ -39,10 +39,12 @@
             </div>
         </div>
     </div>
+
 </section>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+     document.addEventListener("DOMContentLoaded", () => {
         $(document).ready(function () {
             document.getElementsByTagName("center")[0].style.display = "none"
         });

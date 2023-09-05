@@ -163,6 +163,10 @@
         }
     });
 
+    $('#formCadastro').submit(function () {
+        $(this).find(':submit').attr('disabled', 'disabled');
+    });
+
     $(document).ready(function () {
         document.getElementsByTagName("center")[0].style.display = "none"
     });

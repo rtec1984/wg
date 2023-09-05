@@ -32,7 +32,7 @@
         <i class="bx bxs-user-circle"></i>
     </div>
     <div class="input-wrapper">
-        <input type="text" placeholder="WhatsApp (+55 11 99999-9999)" name="Apelido" id="Apelido" maxlength="50" required onchange="this.value = this.value.trim()" />
+        <input type="text" placeholder="WhatsApp" name="Apelido" id="Apelido" maxlength="50" required onchange="this.value = this.value.trim()" />
         <i class="bx bxs-phone"></i>
     </div>
     <div class="input-wrapper">
@@ -184,7 +184,7 @@
             },
             Email: {
                 required: "Esse campo é obrigatório",
-                email: "O E-mail não está no formato adequado",
+                email: "O e-mail não está no formato adequado",
             },
             Senha: {
                 required: "Esse campo é obrigatório",
@@ -195,6 +195,10 @@
                 equalTo: "As senhas não coincidem",
             }
         }
+    });
+
+    $('#formCadastro').submit(function () {
+        $(this).find(':submit').attr('disabled', 'disabled');
     });
 
     $(document).ready(function () {
