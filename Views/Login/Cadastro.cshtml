@@ -19,7 +19,7 @@
         background-color: var(--bg-color) !important;
     }
 
-    .iti-mobile .iti__country-list {
+     .iti-mobile .iti__country-list {
         background-color: var(--bg-color) !important;
     }
 
@@ -30,6 +30,7 @@
         white-space: unset;
         scrollbar-width: thin; /* Para navegadores que suportam a propriedade */
         scrollbar-color: transparent transparent; /* Cor do indicador da barra de rolagem e do fundo */
+        width: 316px;
     }
     .iti__country-list::-webkit-scrollbar {
             width: 8px; /* Largura da barra de rolagem */
@@ -302,6 +303,12 @@
                 console.log(intlNumber);
             });
         };
+        $('input[name="Apelido"]').on("open:countrydropdown", function () {
+            $(".form-content").hide();
+        });
+        $('input[name="Apelido"]').on("close:countrydropdown", function () {
+            $(".form-content").show();
+        });
         $('#formCadastro').submit(function () {
             var intlNumber = iti.getSelectedCountryData().dialCode;
             $('input[name="IntlNumber"]').val(intlNumber);
