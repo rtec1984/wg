@@ -15,18 +15,33 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/css/intlTelInput.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
 <style>
+    .iti-mobile.iti--container {
+        background-color: var(--bg-color) !important;
+        z-index: 9999999;
+    }
+
+    .iti--container {
+        background-color: var(--bg-color) !important;
+        z-index: 9999999;
+    }
+
+    .iti-mobile .iti__country-list {
+        background-color: var(--bg-color) !important;
+        max-height: 200px;
+        width: 315px;
+        margin-top: 400px;
+        margin-left: 18px;
+    }
+
     .iti__country-list {
-        background-color: var(--bg-color);
+        background-color: var(--bg-color) !important;
         box-shadow: unset;
-        background-color: unset;
         border: unset;
         white-space: unset;
         scrollbar-width: thin; /* Para navegadores que suportam a propriedade */
         scrollbar-color: transparent transparent; /* Cor do indicador da barra de rolagem e do fundo */
-        position: absolute; /* Definir a posição como absoluta */
-        margin-top: 40px;
-        width: 383px;
-        margin-left: -30px;
+        max-height: 200px;
+        width: 315px;
     }
     .iti__country-list::-webkit-scrollbar {
             width: 8px; /* Largura da barra de rolagem */
@@ -299,12 +314,6 @@
                 console.log(intlNumber);
             });
         };
-        $('input[name="Apelido"]').on("open:countrydropdown", function () {
-            $(".form-content").hide();
-        });
-        $('input[name="Apelido"]').on("close:countrydropdown", function () {
-            $(".form-content").show();
-        });
         $('#formCadastro').submit(function () {
             var intlNumber = iti.getSelectedCountryData().dialCode;
             $('input[name="IntlNumber"]').val(intlNumber);
