@@ -7,11 +7,54 @@
     ViewData["Title"] = "Criar Partida";
     var Usuarios = ViewData["Usuario"] as List<UsuarioModels>;
 }
+<link href="~/css/alerts.css" rel="stylesheet" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css' rel='stylesheet'>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <!-- Exibindo mensagens de sucesso ou erro -->
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="row" id="Aviso">
+                    <div class="col-sm-12">
+                        <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                            <button type="button" class="close font__size-18" data-dismiss="alert">
+                            </button>
+                            <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                            <strong class="font__weight-semibold">Atenção!</strong> "@Html.Raw(TempData["ErrorMessage"])"
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="row" id="Aviso">
+                    <div class="col-sm-12">
+                        <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                            <button type="button" class="close font__size-18" data-dismiss="alert">
+                            </button>
+                            <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                            "@Html.Raw(TempData["SuccessMessage"])"
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (TempData["WarningMessage"] != null)
+            {
+                <div class="row" id="Aviso">
+                    <div class="col-sm-12">
+                        <div class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                            <button type="button" class="close font__size-18" data-dismiss="alert">
+                            </button>
+                            <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                            <strong class="font__weight-semibold">Atenção!</strong> "@Html.Raw(TempData["WarningMessage"])"
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-md-8" style="margin-left: auto; margin-right: auto;">
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Criar Partida</h3>
@@ -223,11 +266,21 @@
              return false;
            }
          });
-
         $('#formPartida').submit(function () {
             $(this).find(':submit').attr('disabled', 'disabled');
-            alert("Partida cadastrada com sucesso!");
         });
+        $(document).ready(function () {
+            document.getElementsByTagName("center")[0].style.display = "none"
+        });
+        function Fade() {
+            setTimeout(function () {
+                var Aviso = document.getElementById("Aviso");
+                if (Aviso != null) {
+                    Aviso.style.display = "none";
+                }
+            }, 10000);
+        }
 
+        Fade();
     });
 </script>

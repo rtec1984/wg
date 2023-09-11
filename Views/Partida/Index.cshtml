@@ -6,8 +6,72 @@
     TempData["Pagina"] = "Partidas";
     ViewData["Title"] = "Lista de Partidas";
 }
+<link href="~/css/alerts.css" rel="stylesheet" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css' rel='stylesheet'>
 <section class="content">
- @if (User.Identity.GetTema() == "1")
+    <!-- Exibindo mensagens de sucesso ou erro -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="row" id="Aviso">
+            <div class="col-sm-12">
+                <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                    </button>
+                    <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                    <strong class="font__weight-semibold">Atenção!</strong> "@Html.Raw(TempData["ErrorMessage"])"
+                </div>
+            </div>
+        </div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="row" id="Aviso">
+            <div class="col-sm-12">
+                <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    "@Html.Raw(TempData["SuccessMessage"])"
+                </div>
+            </div>
+        </div>
+    }
+    @if (TempData["WarningMessage"] != null)
+    {
+        <div class="row" id="Aviso">
+            <div class="col-sm-12">
+                <div class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                    </button>
+                    <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                    <strong class="font__weight-semibold">Atenção!</strong> "@Html.Raw(TempData["WarningMessage"])"
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row" id="Editar" style="display: none;">
+        <div class="col-sm-12">
+            <div class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                <button type="button" class="close font__size-18" data-dismiss="alert">
+                </button>
+                <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                <strong class="font__weight-semibold">Atenção!</strong> Tem certeza que deseja alterar a partida? Clique para continuar...
+            </div>
+        </div>
+    </div>
+    <div class="row" id="Excluir" style="display: none;">
+        <div class="col-sm-12">
+            <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                <button type="button" class="close font__size-18" data-dismiss="alert">
+                </button>
+                <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                <strong class="font__weight-semibold">Atenção!</strong> Tem certeza que deseja deletar a partida? Clique para continuar...
+            </div>
+        </div>
+    </div>
+    @if (User.Identity.GetTema() == "1")
     {
         <style>
             .fa, .fas {
@@ -35,10 +99,14 @@
                                 <div class="card-tools">
                                     @if (item.Id_Usuario == User.Identity.GetSessionID() && item.Data.AddDays(2) >= DateTime.Now)
                                     {
-                                        <a href="~/deletar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja deletar a partida?');">
+                                        <a href="~/deletar-partida/@item.Id" id="Deletar" style="display: none;">
+                                        </a>
+                                        <a href="~/alterar-partida/@item.Id" id="Alterar" style="display: none;">
+                                        </a>
+                                        <a href="#" id="MsgDeletar">
                                             <i class="bi bi-x-circle"></i>
                                         </a>
-                                        <a href="~/alterar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja alterar a partida?');">
+                                        <a href="#" id="MsgAlterar">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     }
@@ -92,10 +160,14 @@
                                 <div class="card-tools">
                                     @if (item.Id_Usuario == User.Identity.GetSessionID() && item.Data.AddDays(2) >= DateTime.Now)
                                     {
-                                        <a href="~/deletar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja deletar a partida?');">
+                                        <a href="~/deletar-partida/@item.Id" id="Deletar" style="display: none;">
+                                        </a>
+                                        <a href="~/alterar-partida/@item.Id" id="Alterar" style="display: none;">
+                                        </a>
+                                        <a href="#" id="MsgDeletar">
                                             <i class="bi bi-x-circle"></i>
                                         </a>
-                                        <a href="~/alterar-partida/@item.Id" onclick="return confirm('Tem certeza que deseja alterar a partida?');">
+                                        <a href="#" id="MsgAlterar">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     }
@@ -127,3 +199,44 @@
         </div>
     }
 </section>
+<script>
+    $(document).ready(function () {
+        document.getElementsByTagName("center")[0].style.display = "none";
+    });
+
+    function Fade() {
+        setTimeout(function () {
+            var Aviso = document.getElementById("Aviso");
+            if (Aviso != null) {
+                Aviso.style.display = "none";
+            }
+        }, 10000);
+    }
+
+    Fade();
+    $(document).ready(function () {
+
+        $("#MsgAlterar").click(function () {
+            $("#Editar").show();
+            setTimeout(function () {
+                $("#Editar").hide();
+            }, 10000);
+        });
+
+        $("#Editar").click(function () {
+            $("#Editar").hide();
+            window.location.href = $("#Alterar").attr("href");
+        });
+        $("#MsgDeletar").click(function () {
+            $("#Excluir").show();
+            setTimeout(function () {
+                $("#Excluir").hide();
+            }, 10000);
+        });
+
+        $("#Excluir").click(function () {
+            $("#Excluir").hide();
+            window.location.href = $("#Deletar").attr("href");
+        });
+    });
+</script>

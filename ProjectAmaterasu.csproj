@@ -16,10 +16,10 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="Dapper.EntityFramework" Version="2.0.90" />
-    <PackageReference Include="MailKit" Version="3.3.0" />
+    <PackageReference Include="Dapper.EntityFramework" Version="2.0.151" />
+    <PackageReference Include="MailKit" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.16" />
-    <PackageReference Include="MimeKit" Version="3.4.0" />
+    <PackageReference Include="MimeKit" Version="4.2.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 

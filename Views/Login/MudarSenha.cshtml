@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-<title>Mudar Senha</title>
+<title>Mudar senha</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -12,7 +12,15 @@
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css' rel='stylesheet'>
 <link href="~/css/login.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+<style>
+    .form h1 {
+        margin: unset;
+    }
 
+    ul.theme-picker {
+        margin-bottom: 10px;
+    }
+</style>
 <ul class="theme-picker">
     <li data-theme="barney" class="barney"></li>
     <li data-theme="firewatch" class="firewatch"></li>
@@ -25,12 +33,12 @@
 
 <form class="form" asp-controller="Login" asp-action="SalvarSenha" id="formCadastro" method="post" style="perspective: none!important">
     <h1>Mude a sua senha</h1>
-    <p>Essa senha será utilizada daqui para frente para acessar o sistema.</p>
+    <p>Essa senha será utilizada para acessar o sistema.</p>
 
     <input type="text" placeholder="Digite seu Nome" name="CodigoConfirmacao" id="CodigoConfirmacao" value="@TempData["CodigoConfirmacao"]" hidden />
     <input type="text" placeholder="Digite seu e-mail" name="Email" id="Email" class="Email" value="@TempData["EmailMudarSenha"]" hidden />
     <div class="input-wrapper">
-        <input type="password" placeholder="Digite sua senha" name="Senha" min-lenght="8" id="Senha" />
+        <input type="password" placeholder="Digite sua senha" name="Senha" min-lenght="8" id="Senha" onchange="this.value = this.value.trim()" />
         <i class="bx bx-key"></i>
     </div>
     <div class="input-wrapper">
@@ -38,12 +46,9 @@
         <i class="bx bx-key"></i>
     </div>
 
-    <div class="button-wrapper">
-        <button type="submit">
-            Salvar
-            <i class="bx bx-right-arrow-alt"></i>
+    <button type="submit" style="float: right;">
+            Salvar senha
         </button>
-    </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/js.cookie.min.js"></script>

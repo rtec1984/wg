@@ -1,14 +1,22 @@
 ﻿@{
     Layout = null;
 }
-<title>Esqueci a Senha</title>
+<title>Esqueci a senha</title>
 <link href="~/css/login.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+<style>
+    .form h1 {
+        margin: unset;
+    }
 
+    ul.theme-picker {
+        margin-bottom: 10px;
+    }
+</style>
 <ul class="theme-picker">
     <li data-theme="barney" class="barney"></li>
     <li data-theme="firewatch" class="firewatch"></li>
@@ -20,19 +28,18 @@
 </ul>
 
 <form class="form" action="/Login/EsqueciASenha" id="formEsqueciASenha" method="post" style="perspective: none!important">
-    <h1>Olá</h1>
+    <h1>Esqueci a senha</h1>
     <p>Digite seu email para recuperar sua senha.</p>
     <div class="input-wrapper">
-        <input type="text" placeholder="Digite seu e-mail" name="Email" class="Email" />
+        <input type="text" placeholder="Digite seu e-mail" name="Email" class="Email" onchange="this.value = this.value.trim()" />
         <i class='bx bxs-envelope'></i>
     </div>
     <div class="button-wrapper">
-        <button type="button" onclick="location.href='/'">
-            Fazer Login
-        </button>
-        <button type="submit">
-            Solicitar Senha
-            <i class="bx bx-right-arrow-alt"></i>
+        <button type="button" onclick="location.href='/'" style="float: left;">
+            Fazer login
+        </button>            
+        <button type="submit" style="float: right;">
+            Solicitar senha
         </button>
     </div>
 </form>

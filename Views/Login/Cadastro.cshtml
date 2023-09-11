@@ -1,3 +1,4 @@
+﻿@model UsuarioModels;
 ﻿@{
     Layout = null;
 }
@@ -11,8 +12,44 @@
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css' rel='stylesheet'>
 <link href="~/css/login.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/css/intlTelInput.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
-
+<style>
+    .iti__country-list {
+        background-color: var(--bg-color);
+        box-shadow: unset;
+        background-color: unset;
+        border: unset;
+        white-space: unset;
+        scrollbar-width: thin; /* Para navegadores que suportam a propriedade */
+        scrollbar-color: transparent transparent; /* Cor do indicador da barra de rolagem e do fundo */
+        position: absolute; /* Definir a posição como absoluta */
+        margin-top: 40px;
+        width: 383px;
+        margin-left: -30px;
+    }
+    .iti__country-list::-webkit-scrollbar {
+            width: 8px; /* Largura da barra de rolagem */
+    }
+    .iti__country-list::-webkit-scrollbar-thumb {
+            background-color: transparent; /* Cor do indicador da barra de rolagem */
+    }
+    .iti__country-list::-webkit-scrollbar-track {
+            background-color: transparent; /* Cor do fundo da barra de rolagem */
+    }
+    .iti__divider {
+        display: none;
+    }
+    .iti__dial-code {
+        color: var(--color);
+    }
+    .form h1 {
+        margin: unset;
+    }
+    ul.theme-picker {
+        margin-bottom: 10px;
+    }
+</style>
 <ul class="theme-picker">
     <li data-theme="barney" class="barney"></li>
     <li data-theme="firewatch" class="firewatch"></li>
@@ -22,44 +59,59 @@
     <li data-theme="slate" class="slate"></li>
     <li data-theme="candy" class="candy"></li>
 </ul>
-
+<!-- Exibindo mensagens de sucesso ou erro -->
+@if (TempData["NomeExistente"] != null)
+{
+    <div class="row" id="Aviso">
+        <div class="col-sm-12">
+            <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" style="background-color: #6c757d;">
+                <button type="button" class="close font__size-18" data-dismiss="alert">
+                </button>
+                <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                <strong class="font__weight-semibold">Atenção!</strong> "@Html.Raw(TempData["NomeExistente"])"
+            </div>
+        </div>
+    </div>
+}
 <form class="form" asp-controller="Login" asp-action="Salvar" id="formCadastro" method="post" style="perspective: none!important">
-    <h1>Seja Bem-vindo</h1>
+    <h1>WAR-GROW</h1>
     <p>Utilize seus dados para se cadastrar.</p>
+        <div class="input-wrapper">
+            <div class="input-wrapper">
+                <input type="text" placeholder="digite seu nome e sobrenome" name="Nome" id="Nome" required onchange="this.value = this.value.trim()" />
+                <i class="bx bxs-user-circle"></i>
+            </div>
+            <div class="input-wrapper">
+                <input type="hidden" asp-for="IntlNumber" />
+                <input type="tel" class="form-control valid" asp-for="Apelido" style="background-color: var(--input-bg-color); border: none; border-radius: 6px; color: var(--color); font-size: 16px; padding: 14px 89px 14px 97px; transition: all 250ms ease-in-out 0s;height: 52px;" im-insert="true" aria-invalid="false">
+                <i class="bx bxs-phone"></i>
+            </div>
+        <div class="form-content">
+            <div class="input-wrapper">
+                <input type="text" placeholder="digite seu e-mail" name="Email" id="Email" required onchange="this.value = this.value.trim()" style="text-transform: lowercase !important;" />
+                <i class='bx bxs-envelope'></i>
+            </div>
 
-    <div class="input-wrapper">
-        <input type="text" placeholder="Digite seu nome e sobrenome" name="Nome" id="Nome" required onchange="this.value = this.value.trim()" />
-        <i class="bx bxs-user-circle"></i>
-    </div>
-    <div class="input-wrapper">
-        <input type="text" placeholder="WhatsApp" name="Apelido" id="Apelido" maxlength="50" required onchange="this.value = this.value.trim()" />
-        <i class="bx bxs-phone"></i>
-    </div>
-    <div class="input-wrapper">
-        <input type="text" placeholder="Digite seu e-mail" name="Email" id="Email" />
-        <i class='bx bxs-envelope'></i>
-    </div>
-
-    <div class="input-wrapper">
-        <input type="password" placeholder="Digite sua senha" name="Senha" id="Senha" required onchange="this.value = this.value.trim()" />
-        <i class="bx bx-key"></i>
-    </div>
-    <div class="input-wrapper">
-        <input type="password" placeholder="Confirme sua senha" name="ConfirmeSenha" id="ConfirmeSenha" />
-        <i class="bx bx-key"></i>
-    </div>
-
-    <div class="button-wrapper">
-        <button type="button" onclick="location.href='/'">
-            Fazer Login
-        </button>
-        <button type="submit">
-            Salvar
-            <i class="bx bx-right-arrow-alt"></i>
-        </button>
-    </div>
+            <div class="input-wrapper">
+                <input type="password" placeholder="digite sua senha" name="Senha" id="Senha" required onchange="this.value = this.value.trim()" />
+                <i class="bx bx-key"></i>
+            </div>
+            <div class="input-wrapper">
+                <input type="password" placeholder="confirme sua senha" name="ConfirmeSenha" id="ConfirmeSenha" />
+                <i class="bx bx-key"></i>
+            </div>
+            <button type="button" onclick="location.href='/'" style="float: left;">
+                    Fazer login
+                </button>
+                <button type="submit" style="float: right;">
+                    Cadastrar
+                </button>
+        </div>
 </form>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.8/jquery.inputmask.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/utils.js"></script>
 <script src="/js/js.cookie.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script>
@@ -153,14 +205,13 @@
             }
         };
     }
-
     $("#formCadastro").validate({
         rules: {
             Nome: {
                 required: true,
             },
             Apelido: {
-                required: true,
+                required: false,
             },
             Email: {
                 required: true,
@@ -197,10 +248,6 @@
         }
     });
 
-    $('#formCadastro').submit(function () {
-        $(this).find(':submit').attr('disabled', 'disabled');
-    });
-
     $(document).ready(function () {
         document.getElementsByTagName("center")[0].style.display = "none"
     });
@@ -226,4 +273,45 @@
         const email = obscureEmail("@Html.Raw(TempData["EmailCadastrado"])");
         $("#EmailCadastrado").html(email);
     }
+    $(function () {
+        var input = document.querySelectorAll("input[name=Apelido]");
+        var iti = $('.iti.iti--allow-dropdown.iti--separate-dial-code');
+        for (var i = 0; i < input.length; i++) {
+            iti = intlTelInput(input[i], {
+                autoHideDialCode: false,
+                autoPlaceholder: "aggressive",
+                initialCountry: "br",
+                separateDialCode: true,
+                preferredCountries: ['br', 'us'],
+                customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
+                    return '' + selectedCountryPlaceholder.replace(/[0-9]/g, 'X');
+                },
+            });
+            $('input[name="Apelido"]').on("focus click countrychange", function (e, countryData) {
+                var pl = $(this).attr('placeholder') + '';
+                var res = pl.replace(/X/g, '9');
+                if (res != 'undefined') {
+                    $(this).inputmask(res, { placeholder: "X", clearMaskOnLostFocus: true });
+                }
+            });
+            $('input[name="Apelido"]').on("focusout", function (e, countryData) {
+                var intlNumber = iti.getNumber();
+                console.log(intlNumber);
+            });
+        };
+        $('input[name="Apelido"]').on("open:countrydropdown", function () {
+            $(".form-content").hide();
+        });
+        $('input[name="Apelido"]').on("close:countrydropdown", function () {
+            $(".form-content").show();
+        });
+        $('#formCadastro').submit(function () {
+            var intlNumber = iti.getSelectedCountryData().dialCode;
+            $('input[name="IntlNumber"]').val(intlNumber);
+            $(this).find(':submit').attr('disabled', 'disabled');
+            setTimeout(function () {
+                form.find(':submit').removeAttr('disabled');
+            }, 5000);
+        });
+    });
 </script>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "inputmask": "^5.0.8",
+    "intl-tel-input": "^18.2.1"
+  }
+}

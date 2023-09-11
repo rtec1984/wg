@@ -12,6 +12,14 @@
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css' rel='stylesheet'>
 <link href="~/css/login.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+<style>
+    .form h1 {
+        margin: unset;
+    }
+    ul.theme-picker {
+        margin-bottom: 10px;
+    }
+</style>
 @if (TempData["ValidacaoSenha"] != null)
 {
     <div class="row" id="Aviso">
@@ -49,29 +57,28 @@
 </ul>
 
 <form class="form" asp-controller="Login" asp-action="VerificarUsuario" id="formLogin" method="post" style="perspective: none!important">
-    <h1>Seja Bem-vindo</h1>
+    <h1>WAR-GROW</h1>
     <p>Use suas credenciais para entrar.</p>
 
     <div class="input-wrapper">
-        <input type="text" placeholder="Digite seu e-mail" name="Email" />
+        <input type="text" placeholder="Digite seu e-mail" name="Email" onchange="this.value = this.value.trim()" style="text-transform: lowercase !important;">
         <i class='bx bxs-envelope'></i>
     </div>
 
     <div class="input-wrapper">
-        <input type="password" placeholder="Digite sua senha" name="Senha" />
+        <input type="password" placeholder="digite sua senha" name="Senha" onchange="this.value = this.value.trim()" />
         <i class="bx bx-key"></i>
     </div>
 
     <div class="button-wrapper">
-        <button type="button" onclick="location.href='/cadastre-se'">
+        <button type="button" onclick="location.href='/cadastre-se'" style="float: left;">
             Cadastre-se
-        </button> - 
-        <button type="button" onclick="location.href='/esqueci-a-senha'">
-            Esqueci a Senha
         </button>
+        <button type="button" onclick="location.href='/esqueci-a-senha'" style="float: right;">
+            Esqueci a senha
+        </button><br />
         <button type="submit">
-            Entrar
-            <i class="bx bx-right-arrow-alt"></i>
+            Fazer login
         </button>
     </div>
 </form>

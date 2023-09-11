@@ -64,65 +64,76 @@ namespace ProjectAmaterasu.Controllers
         #endregion
 
         #region Verificar Administrador (Login)
-        public IActionResult VerificarAdministrador(UsuarioModels Login, string ReturnUrl)
+        public IActionResult VerificarAdministrador(UsuarioModels login, string returnUrl)
         {
             try
             {
+                login.Email = login.Email.ToLower();
+
+                // Validar o modelo
+                if (!ModelState.IsValid)
+                {
+                    TempData["ContaExistente"] = "Usuário ou senha inválidos!";
+                    return Redirect("~/login-administrador");
+                }
+
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
-                    Login.Email = Login.Email.ToLower();
-                    var Usuario = connection.Query<UsuarioModels>(@"SELECT *, LOWER(Email) FROM Usuario where @Email = Email", new { email = Login.Email }).FirstOrDefault();
+                    var usuario = connection.QueryFirstOrDefault<UsuarioModels>(
+                        @"SELECT * FROM Usuario WHERE Email = @Email",
+                        new { Email = login.Email });
 
-                    if (Usuario.SenhaTemporaria)
+                    if (usuario != null)
                     {
-                        TempData["EmailCadastrado"] = Usuario.Email;
-                        TempData["ContaExistente"] = "Esta conta se encontra em processo de mudança de senha, verifique o e-mail:<br> " +
-                            "<label id='EmailCadastrado'></label>, para mais instruções ou altere sua senha <a href='/esqueci-a-senha'>clicando aqui!</a>";
-                        return Redirect("~/login-administrador");
-                    }
-                    else if (Usuario != null)
-                    {
-                        bool verificado = BCrypt.Net.BCrypt.Verify(Login.Email + "salt" + Login.Senha, Usuario.Senha);
+                        if (usuario.SenhaTemporaria)
+                        {
+                            TempData["EmailCadastrado"] = usuario.Email;
+                            TempData["ContaExistente"] = "Esta conta se encontra em processo de mudança de senha, verifique o e-mail:<br> " +
+                                "<label id='EmailCadastrado'></label>, para mais instruções ou altere sua senha <a href='/esqueci-a-senha'>clicando aqui!</a>";
+                            return Redirect("~/login-administrador");
+                        }
+
+                        bool verificado = BCrypt.Net.BCrypt.Verify(login.Email + "salt" + login.Senha, usuario.Senha);
                         if (verificado)
                         {
-                            AutenticaUsuario(Usuario);
-                            if (!String.IsNullOrEmpty(ReturnUrl))
+                            if (usuario.Administrador == true) // Verifica se o usuário é um administrador
                             {
-                                return Redirect(System.Net.WebUtility.HtmlEncode(ReturnUrl));
+                                AutenticaUsuario(usuario);
+                                if (!String.IsNullOrEmpty(returnUrl))
+                                {
+                                    return Redirect(System.Net.WebUtility.HtmlEncode(returnUrl));
+                                }
+                                else
+                                {
+                                    return Redirect("~/painel-administrador");
+                                }
                             }
                             else
                             {
-                                return Redirect("~/painel-administrador");
+                                TempData["ContaExistente"] = "Você não tem permissão de administrador para fazer login.";
+                                return Redirect("~/login-administrador");
                             }
                         }
-                        else
-                        {
-                            TempData["ContaExistente"] = "Usuário ou senha inválidos!";
-                            return Redirect("~/login-administrador");
-                        }
-                    }
-                    else
-                    {
-                        TempData["ContaExistente"] = "Usuário ou senha inválidos!";
-                        return Redirect("~/login-administrador");
                     }
                 }
+
+                TempData["ContaExistente"] = "Usuário ou senha inválidos!";
+                return Redirect("~/login-administrador");
             }
             catch
             {
-                if (!String.IsNullOrEmpty(ReturnUrl))
+                if (!String.IsNullOrEmpty(returnUrl))
                 {
-                    return Redirect(System.Net.WebUtility.HtmlEncode(ReturnUrl));
-
+                    return Redirect(System.Net.WebUtility.HtmlEncode(returnUrl));
                 }
                 else
                 {
                     return Redirect("/");
                 }
             }
-
         }
         #endregion
+
 
         #region Verificar Usuário (Login)
         public IActionResult VerificarUsuario(UsuarioModels Login, string ReturnUrl)
@@ -287,9 +298,10 @@ namespace ProjectAmaterasu.Controllers
                 if (usuario.Nome.Split(' ').Count() > 1)
                 {
                     var nome = char.ToUpper(usuario.Nome.Split(' ')[0][0]) + usuario.Nome.Split(' ')[0].Substring(1).ToLower();
-                    var sobrenome = char.ToUpper(usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1][0]) + 
+                    var sobrenome = char.ToUpper(usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1][0]) +
                         usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1].Substring(1).ToLower();
                     usuario.Nome = nome + " " + sobrenome;
+                    usuario.Apelido = "+" + usuario.IntlNumber + " " + usuario.Apelido;
                 }
                 else
                 {
@@ -299,18 +311,29 @@ namespace ProjectAmaterasu.Controllers
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
                     usuario.Email = usuario.Email.ToLower();
-                    var UsuarioVerificacao = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE @Email = Email OR Apelido = @Apelido", new { email = usuario.Email, apelido = usuario.Apelido }).FirstOrDefault();
+
+                    // Verificar se o nome já existe no banco de dados
+                    var nomeExistente = connection.Query<UsuarioModels>(@"SELECT 1 FROM Usuario WHERE Nome = @Nome", new { nome = usuario.Nome }).FirstOrDefault();
+
+                    if (nomeExistente != null)
+                    {
+                        TempData["NomeExistente"] = "Esse nome já está em uso, escolha outro.";
+                        return Redirect("/cadastre-se");
+                    }
+
+                    // Verificar se o email ou apelido já existem no banco de dados
+                    var UsuarioVerificacao = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Email = @Email OR Apelido = @Apelido", new { email = usuario.Email, apelido = usuario.Apelido }).FirstOrDefault();
 
                     if (UsuarioVerificacao == null)
                     {
                         var criptografia = BCrypt.Net.BCrypt.HashPassword(usuario.Email + "salt" + usuario.Senha, workFactor: 12);
                         usuario.Senha = criptografia;
-                        TempData["ValidacaoSenha"] = "Cadastro realizado com sucesso, favor realizar o login para acessar demais funcionalidades do sistema.";
-                        connection.Execute("INSERT INTO Usuario (Nome, Email, Senha, Tema, Apelido) Values (@Nome, @Email, @Senha, '1', @Apelido)", usuario);
+                        TempData["ValidacaoSenha"] = "Cadastro realizado com sucesso!";
+                        connection.Execute("INSERT INTO Usuario (Nome, Email, Senha, Tema, Apelido) Values (@Nome, @Email, @Senha, '2', @Apelido)", usuario);
                     }
                     else
                     {
-                        TempData["ContaExistente"] = "Esse e-mail ou WhatsApp já está cadastrado, caso não recorde da senha  <a href='/esqueci-a-senha'>clique aqui!</a>";
+                        TempData["ContaExistente"] = "Esse e-mail ou WhatsApp já está cadastrado, faça login ou tente novamente!";
                     }
                     return Redirect("/");
                 }

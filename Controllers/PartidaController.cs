@@ -21,7 +21,6 @@ namespace ProjectAmaterasu.Controllers
         }
         #endregion
 
-
         [Authorize(Roles = "Usuario_Comum")]
         [Route("partida")]
         public IActionResult Index()
@@ -69,7 +68,8 @@ namespace ProjectAmaterasu.Controllers
         {
             if (partida.Duracao < 0)
             {
-                return Redirect("~/partida");
+                TempData["ErrorMessage"] = "A duração da partida não pode ser negativa.";
+                return RedirectToAction("Index");
             }
 
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
@@ -81,23 +81,26 @@ namespace ProjectAmaterasu.Controllers
                 if (Partida != null)
                 {
                     connection.Execute(@"UPDATE Partida SET Id_Usuario_2 = @Id_Usuario_2, Id_Usuario_3 = @Id_Usuario_3, Id_Usuario_4 = @Id_Usuario_4, Id_Usuario_5 = @Id_Usuario_5, Id_Usuario_6 = @Id_Usuario_6, Duracao = @Duracao, Pontuacao = @Pontuacao WHERE Id = @Id", partida);
+                    TempData["SuccessMessage"] = "Partida atualizada com sucesso.";
 
-                    return Redirect("~/partida");
                 }
                 else if (partida.Data.AddMonths(1) > DateTime.Now && partida.Data <= DateTime.Now)
                 {
                     connection.Execute(@"INSERT INTO Partida (Id_Usuario, Id_Usuario_2, Id_Usuario_3, Id_Usuario_4, Id_Usuario_5, Id_Usuario_6, Data, Duracao, Pontuacao) 
-                                         VALUES (@Id_Usuario, @Id_Usuario_2, @Id_Usuario_3, @Id_Usuario_4, @Id_Usuario_5, @Id_Usuario_6, @Data, @Duracao, @Pontuacao)", partida);
+                                VALUES (@Id_Usuario, @Id_Usuario_2, @Id_Usuario_3, @Id_Usuario_4, @Id_Usuario_5, @Id_Usuario_6, @Data, @Duracao, @Pontuacao)", partida);
+                    TempData["SuccessMessage"] = "Partida criada com sucesso.";
 
-                    return Redirect("~/partida");
                 }
                 else
                 {
-                    return Redirect("~/partida");
+                    TempData["ErrorMessage"] = "A data da partida não é válida.";
 
                 }
             }
+
+            return RedirectToAction("Index");
         }
+
 
         protected int CalcularPontuacao(int duracao)
         {
@@ -131,14 +134,22 @@ namespace ProjectAmaterasu.Controllers
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
-                var Partida = connection.Query<PartidaModels>(@"SELECT * FROM Partida WHERE Id_Usuario = @Id_Usuario", new { Id_Usuario = User.Identity.GetSessionID() }).FirstOrDefault();
+                var Partida = connection.Query<PartidaModels>(@"SELECT * FROM Partida WHERE Id_Usuario = @Id_Usuario AND Id = @Id", new { Id_Usuario = User.Identity.GetSessionID(), Id = id }).FirstOrDefault();
                 if (Partida != null)
                 {
-                    connection.Execute(@"DELETE FROM Partida Where Id = @id", new { id });
-                }
+                    connection.Execute(@"DELETE FROM Partida WHERE Id = @id", new { id });
+                    TempData["SuccessMessage"] = "Partida deletada com sucesso.";
 
-                return Redirect("~/partida");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Partida não encontrada ou você não tem permissão para excluí-la.";
+
+                }
             }
+
+            return RedirectToAction("Index");
         }
+
     }
 }
