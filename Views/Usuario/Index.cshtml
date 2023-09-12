@@ -88,56 +88,51 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.8/jquery.inputmask.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/intlTelInput.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/utils.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script>
-        $(function () {
-            var input = document.querySelectorAll("input[name=Apelido]");
-            var iti = $('.iti.iti--allow-dropdown.iti--separate-dial-code');
-            for (var i = 0; i < input.length; i++) {
-                iti = intlTelInput(input[i], {
-                    autoHideDialCode: false,
-                    autoPlaceholder: "aggressive",
-                    initialCountry: "br",
-                    separateDialCode: true,
-                    preferredCountries: ['br', 'us'],
-                    customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
-                        return '' + selectedCountryPlaceholder.replace(/[0-9]/g, 'X');
-                    },
-                });
-                $('input[name="Apelido"]').on("focus click countrychange", function (e, countryData) {
-                    var pl = $(this).attr('placeholder') + '';
-                    var res = pl.replace(/X/g, '9');
-                    if (res != 'undefined') {
-                        $(this).inputmask(res, { placeholder: "X", clearMaskOnLostFocus: true });
-                    }
-                });
-                $('input[name="Apelido"]').on("focusout", function (e, countryData) {
-                    var intlNumber = iti.getNumber();
-                    console.log(intlNumber);
-                });
-            }
-            $('#formPerfil').submit(function () {
-                var intlNumber = iti.getSelectedCountryData().dialCode;
-                // Atualize o campo oculto com o valor do intlNumber
-                $('input[name="IntlNumber"]').val(intlNumber);
-                $(this).find(':submit').attr('disabled', 'disabled');
-            });
-        });
-        $(document).ready(function () {
-            document.getElementsByTagName("center")[0].style.display = "none"
-        });
-        function Fade() {
-            setTimeout(function () {
-                var Aviso = document.getElementById("Aviso");
-                if (Aviso != null) {
-                    Aviso.style.display = "none";
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.8/jquery.inputmask.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/js/utils.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script>
+    $(function () {
+        var input = document.querySelectorAll("input[name=Apelido]");
+        for (var i = 0; i < input.length; i++) {
+            var iti = intlTelInput(input[i], {
+                autoHideDialCode: false,
+                autoPlaceholder: "aggressive",
+                initialCountry: "auto",
+                separateDialCode: true,
+                preferredCountries: ['br', 'us'],
+                customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
+                    return '' + selectedCountryPlaceholder.replace(/[0-9]/g, 'X');
+                },
+                geoIpLookup: function (callback) {
+                    $.get('https://ipinfo.io?token=aaf5f2a365d80d', function () { }, "jsonp").always(function (resp) {
+                        var countryCode = (resp && resp.country) ? resp.country : "";
+                        callback(countryCode);
+                    });
                 }
-            }, 10000);
+            });
+
+            $('input[name="Apelido"]').on("focus click countrychange", function (e, countryData) {
+                var pl = $(this).attr('placeholder') + '';
+                var res = pl.replace(/X/g, '9');
+                if (res !== 'undefined') {
+                    $(this).inputmask(res, { placeholder: "X", clearMaskOnLostFocus: true });
+                }
+            });
+
+            $('input[name="Apelido"]').on("focusout", function (e, countryData) {
+                var intlNumber = iti.getNumber();
+                console.log(intlNumber);
+            });
         }
 
-        Fade();
-    </script>
-</section>
+        $('#formPerfil').submit(function () {
+            var intlNumber = iti.getSelectedCountryData().dialCode;
+            // Atualize o campo oculto com o valor do intlNumber
+            $('input[name="IntlNumber"]').val(intlNumber);
+            $(this).find(':submit').attr('disabled', 'disabled');
+        });
+    });
+</script>

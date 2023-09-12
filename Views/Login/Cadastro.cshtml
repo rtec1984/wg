@@ -280,17 +280,23 @@
             iti = intlTelInput(input[i], {
                 autoHideDialCode: false,
                 autoPlaceholder: "aggressive",
-                initialCountry: "br",
+                initialCountry: "auto",
                 separateDialCode: true,
                 preferredCountries: ['br', 'us'],
                 customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
                     return '' + selectedCountryPlaceholder.replace(/[0-9]/g, 'X');
                 },
+                geoIpLookup: function (callback) {
+                    $.get('https://ipinfo.io?token=aaf5f2a365d80d', function () { }, "jsonp").always(function (resp) {
+                        var countryCode = (resp && resp.country) ? resp.country : "";
+                        callback(countryCode);
+                    });
+                }
             });
             $('input[name="Apelido"]').on("focus click countrychange", function (e, countryData) {
                 var pl = $(this).attr('placeholder') + '';
                 var res = pl.replace(/X/g, '9');
-                if (res != 'undefined') {
+                if (res !== 'undefined') {
                     $(this).inputmask(res, { placeholder: "X", clearMaskOnLostFocus: true });
                 }
             });
@@ -298,7 +304,7 @@
                 var intlNumber = iti.getNumber();
                 console.log(intlNumber);
             });
-        };
+        }
         $('#formCadastro').submit(function () {
             var intlNumber = iti.getSelectedCountryData().dialCode;
             $('input[name="IntlNumber"]').val(intlNumber);
