@@ -15,8 +15,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.0/css/intlTelInput.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
 <style>
-    form .input-wrapper {
-        transform: unset;
+    form .input-wrapper, h1, p {
+        transform: unset !important;        
+    }
+    form  h1 {
+        margin: unset;
     }
     .iti__country-list {
         background-color: var(--bg-color) !important;
@@ -42,9 +45,6 @@
     }
     .iti__dial-code {
         color: var(--color);
-    }
-    .form h1 {
-        margin: unset;
     }
     ul.theme-picker {
         margin-bottom: 10px;
