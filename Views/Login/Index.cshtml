@@ -19,6 +19,9 @@
     ul.theme-picker {
         margin-bottom: 10px;
     }
+    button:hover {
+        outline: 5px auto -webkit-focus-ring-color !important;
+    }
 </style>
 @if (TempData["ValidacaoSenha"] != null)
 {
@@ -77,7 +80,7 @@
         <button type="submit" style="float: right;">
             Fazer login
         </button><br />
-        <button type="button" onclick="location.href='/esqueci-a-senha'" style="float: left;">
+        <button type="button" onclick="location.href='/esqueci-a-senha'" style="float: left;margin-top: 10px;">
             Esqueci a senha
         </button>
     </div>
