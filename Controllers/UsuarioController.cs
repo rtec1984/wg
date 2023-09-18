@@ -34,14 +34,18 @@ namespace ProjectAmaterasu.Controllers
         }
 
         [Authorize(Roles = "Usuario_Comum")]
+        [Authorize(Roles = "Usuario_Comum")]
         public IActionResult SalvarUsuario(UsuarioModels usuario)
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
-                // Verifique se o nome ou apelido já estão em uso
-                var usuarioExistente = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Nome = @Nome OR Apelido = @Apelido", new { Nome = usuario.Nome, Apelido = usuario.Apelido }).FirstOrDefault();
+                // Obtenha os dados do usuário atual
+                var usuarioAtual = connection.Query<UsuarioModels>("SELECT * FROM Usuario WHERE Id = @Id", new { Id = User.Identity.GetSessionID() }).FirstOrDefault();
 
-                if (usuarioExistente == null || usuarioExistente.Id == User.Identity.GetSessionID())
+                // Verifique se o novo email é único
+                var emailExistente = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Email = @Email AND Id != @Id", new { Email = usuario.Email, Id = User.Identity.GetSessionID() }).FirstOrDefault();
+
+                if (usuarioAtual != null && (emailExistente == null || emailExistente.Id == usuarioAtual.Id))
                 {
                     var nome = char.ToUpper(usuario.Nome.Split(' ')[0][0]) + usuario.Nome.Split(' ')[0].Substring(1).ToLower();
                     var sobrenome = char.ToUpper(usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1][0]) +
@@ -49,10 +53,12 @@ namespace ProjectAmaterasu.Controllers
                     usuario.Nome = nome + " " + sobrenome;
                     usuario.Apelido = "+" + usuario.IntlNumber + " " + usuario.Apelido;
 
-                    // Agora, verifique se o nome e o apelido são diferentes antes de atualizar
-                    if (usuarioExistente == null || usuario.Nome != usuarioExistente.Nome || usuario.Apelido != usuarioExistente.Apelido)
+                    // Verifique se algum dado foi modificado
+                    if (usuario.Nome != usuarioAtual.Nome || usuario.Apelido != usuarioAtual.Apelido || usuario.Email != usuarioAtual.Email)
                     {
-                        connection.Execute("UPDATE Usuario SET Nome = @Nome, Apelido = @Apelido WHERE Id = @Id", new { usuario.Nome, Id = User.Identity.GetSessionID(), Apelido = usuario.Apelido });
+                        // Atualize os campos que foram modificados
+                        var updateQuery = "UPDATE Usuario SET Nome = @Nome, Apelido = @Apelido, Email = @Email WHERE Id = @Id";
+                        connection.Execute(updateQuery, new { usuario.Nome, Id = User.Identity.GetSessionID(), Apelido = usuario.Apelido, Email = usuario.Email });
                         _ = User.AddUpdateClaimAsync("Name", usuario.Nome);
                         TempData["AtualizaCadastro"] = "Cadastro atualizado com sucesso.";
                     }
@@ -61,6 +67,10 @@ namespace ProjectAmaterasu.Controllers
                         TempData["DadosIguais"] = "Nenhum dado foi modificado.";
                     }
                 }
+                else if (emailExistente != null)
+                {
+                    TempData["CadastroExistente"] = "O email já está cadastrado.";
+                }
                 else
                 {
                     TempData["CadastroExistente"] = "O nome ou apelido já está cadastrado.";
@@ -68,6 +78,5 @@ namespace ProjectAmaterasu.Controllers
                 return Redirect("~/perfil");
             }
         }
-
     }
 }
