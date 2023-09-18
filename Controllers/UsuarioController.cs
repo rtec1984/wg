@@ -34,7 +34,6 @@ namespace ProjectAmaterasu.Controllers
         }
 
         [Authorize(Roles = "Usuario_Comum")]
-        [Authorize(Roles = "Usuario_Comum")]
         public IActionResult SalvarUsuario(UsuarioModels usuario)
         {
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
@@ -45,7 +44,16 @@ namespace ProjectAmaterasu.Controllers
                 // Verifique se o novo email é único
                 var emailExistente = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Email = @Email AND Id != @Id", new { Email = usuario.Email, Id = User.Identity.GetSessionID() }).FirstOrDefault();
 
-                if (usuarioAtual != null && (emailExistente == null || emailExistente.Id == usuarioAtual.Id))
+                // Verifique se o novo nome é único
+                var nomeExistente = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Nome = @Nome AND Id != @Id", new { Nome = usuario.Nome, Id = User.Identity.GetSessionID() }).FirstOrDefault();
+
+                // Verifique se o novo apelido é único
+                var apelidoExistente = connection.Query<UsuarioModels>(@"SELECT * FROM Usuario WHERE Apelido = @Apelido AND Id != @Id", new { Apelido = "+" + usuario.IntlNumber + " " + usuario.Apelido, Id = User.Identity.GetSessionID() }).FirstOrDefault();
+
+                if (usuarioAtual != null &&
+                    (emailExistente == null || emailExistente.Id == usuarioAtual.Id) &&
+                    (nomeExistente == null || nomeExistente.Id == usuarioAtual.Id) &&
+                    (apelidoExistente == null || apelidoExistente.Id == usuarioAtual.Id))
                 {
                     var nome = char.ToUpper(usuario.Nome.Split(' ')[0][0]) + usuario.Nome.Split(' ')[0].Substring(1).ToLower();
                     var sobrenome = char.ToUpper(usuario.Nome.Split(' ')[usuario.Nome.Split(' ').Count() - 1][0]) +
@@ -71,12 +79,17 @@ namespace ProjectAmaterasu.Controllers
                 {
                     TempData["CadastroExistente"] = "O email já está cadastrado.";
                 }
+                else if (nomeExistente != null)
+                {
+                    TempData["CadastroExistente"] = "O nome já está cadastrado.";
+                }
                 else
                 {
-                    TempData["CadastroExistente"] = "O nome ou apelido já está cadastrado.";
+                    TempData["CadastroExistente"] = "O apelido já está cadastrado.";
                 }
                 return Redirect("~/perfil");
             }
         }
+
     }
 }
