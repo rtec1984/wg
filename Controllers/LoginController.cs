@@ -327,8 +327,33 @@ namespace ProjectAmaterasu.Controllers
                     {
                         var criptografia = BCrypt.Net.BCrypt.HashPassword(usuario.Email + "salt" + usuario.Senha, workFactor: 12);
                         usuario.Senha = criptografia;
-                        TempData["ValidacaoSenha"] = "Cadastro realizado com sucesso!";
                         connection.Execute("INSERT INTO Usuario (Nome, Email, Senha, Tema, Apelido) Values (@Nome, @Email, @Senha, '2', @Apelido)", usuario);
+                        // Recupere o modelo de email de boas-vindas do banco de dados.
+                        var emailBoasVindas = connection.Query<SMTPModels>(@"SELECT * FROM SMTP WHERE TipoEmail = 'Boas Vindas'").FirstOrDefault();
+
+                        if (emailBoasVindas != null)
+                        {
+                            var email = new MimeMessage();
+                            email.From.Add(new MailboxAddress("Contato WG", emailBoasVindas.UsuarioServidor)); // Nome do remetente como "Suporte WG"
+                            email.To.Add(MailboxAddress.Parse(usuario.Email));
+                            email.Subject = "Boas vindas ao Sistema WG";
+
+                            // Construa o corpo do email de boas-vindas (personalize conforme necessário).
+                            email.Body = new TextPart(TextFormat.Html)
+                            {
+                                Text = $"<h1><center><b>Olá, {usuario.Nome}! 👋</b><br /><br /><b>Boas vindas ao Sistema WG! 🎉<br /><br />Agradecemos por se cadastrar em nosso <a href='https://wgfm.azurewebsites.net/'>Sistema</a>. Esperamos que tenha uma ótima experiência! 😎<br /><br />Siga nosso <a href=\"https://www.instagram.com/war_grow\">Instagram</a> e se ainda não faz parte do nosso grupo no <a href=\"https://chat.whatsapp.com/IdVAJ8OQHnJ7bXYRdXGQIr\">WhatsApp</a> participe! 🌟<br /><br />Atenciosamente,<br /><br />🎲 WAR-GROW 💣</b></center></h1>"
+                            };
+
+                            using (var smtp = new SmtpClient())
+                            {
+                                smtp.Connect(emailBoasVindas.HostServidor, emailBoasVindas.Porta);
+                                smtp.Authenticate(emailBoasVindas.UsuarioServidor, emailBoasVindas.Senha);
+                                smtp.Send(email);
+                                smtp.Disconnect(true);
+                            }
+                        }
+
+                        TempData["ValidacaoSenha"] = "Cadastro realizado com sucesso!";
                     }
                     else
                     {
@@ -384,10 +409,9 @@ namespace ProjectAmaterasu.Controllers
                     email.Subject = "Solicitação de troca de senha.";
 
                     // Substitua a URL no corpo do e-mail pelo texto de link amigável.
-                    string corpoEmail = SMTP.CorpoEmail
-                        .Replace("{2}", Usuario.Nome);
+                    string corpoEmail = SMTP.CorpoEmail;
 
-                    string linkAmigavel = $"<a href='https://wgfm.azurewebsites.net/esqueci-a-senha-confirmacao/{codigoverificacao}'>Clique aqui</a> para definir sua nova senha.";
+                    string linkAmigavel = $"<h1><center><b>Olá, {Usuario.Nome}! 👋<br /><br />Você solicitou a troca de senha. ⚠<br /><br /><a href='https://wgfm.azurewebsites.net/esqueci-a-senha-confirmacao/{codigoverificacao}'>Clique aqui</a> para definir sua nova senha. 😎<br /><br />Atenciosamente,<br /><br /><b>🎲 WAR-GROW 💣</b></center></h1>";
 
                     // Agora substitua a parte do corpo do e-mail onde você deseja que o link seja exibido.
                     corpoEmail = corpoEmail.Replace("{1}", linkAmigavel);
@@ -493,7 +517,7 @@ namespace ProjectAmaterasu.Controllers
                         email.Subject = "Troca de senha realizada com sucesso!";
                         email.Body = new TextPart(TextFormat.Html)
                         {
-                            Text = $"Olá, {UsuarioVerificacao.Nome}, a sua senha foi alterada com sucesso! <a href='https://wgfm.azurewebsites.net/'>Clique aqui</a> para acessar o sistema."
+                            Text = $"<h1><center><b>Olá, {UsuarioVerificacao.Nome}! 👋</b><br /><br /><b>A sua senha foi alterada com sucesso! 🎉<br /><br /><a href='https://wgfm.azurewebsites.net/'>Clique aqui</a> para acessar o sistema. 🌟<br /><br />Atenciosamente,<br /><br />🎲 WAR-GROW 💣</b></center></h1>"
                         };
 
                         using (var smtp = new SmtpClient())
