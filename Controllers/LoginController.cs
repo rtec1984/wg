@@ -411,7 +411,7 @@ namespace ProjectAmaterasu.Controllers
                     // Substitua a URL no corpo do e-mail pelo texto de link amigável.
                     string corpoEmail = SMTP.CorpoEmail;
 
-                    string linkAmigavel = $"<h1><center><b>Olá, {Usuario.Nome}! 👋<br /><br />Você solicitou a troca de senha. ⚠<br /><br /><a href='https://wgfm.azurewebsites.net/esqueci-a-senha-confirmacao/{codigoverificacao}'>Clique aqui</a> para definir sua nova senha. 😎<br /><br />Atenciosamente,<br /><br /><b>🎲 WAR-GROW 💣</b></center></h1>";
+                    string linkAmigavel = $"<h1><center><b>Olá, {Usuario.Nome}! 👋<br /><br />Você solicitou a troca de senha. 😬<br /><br /><a href='https://wgfm.azurewebsites.net/esqueci-a-senha-confirmacao/{codigoverificacao}'>Clique aqui</a> para definir sua nova senha. 😎<br /><br />Atenciosamente,<br /><br /><b>🎲 WAR-GROW 💣</b></center></h1>";
 
                     // Agora substitua a parte do corpo do e-mail onde você deseja que o link seja exibido.
                     corpoEmail = corpoEmail.Replace("{1}", linkAmigavel);

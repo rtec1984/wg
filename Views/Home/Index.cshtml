@@ -1,296 +1,294 @@
-﻿@{
+﻿@using ProjectAmaterasu.Extensions
+@{
     ViewData["Title"] = "Regras";
 }
+@if (User.Identity.GetTema() == "1")
+{
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Regras do grupo War-Grow</title>
+        <style>
+            body {
+                color: #343A40; /* Cor do texto */
+                font-family: Arial, sans-serif;
+            }
 
-<div class="text-center">
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="text-align: center;">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-weight: 700;">
-            Jogar limpo é
-            a melhor estratégia!
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="text-align: center;">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-weight: 700;">
-            Temos uma
-            regra importante: jogar limpo, sempre.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="text-align: center;">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-weight: 700;">
-            Agimos com
-            honestidade, respeito e transparência!
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="text-align: center;">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-weight: 700;">
-            As
-            estratégias podem mudar, mas jogar limpo é condição.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="text-align: center;">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-weight: 700;">
-            Sorte é para
-            quem merece!
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="text-align: center;">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-weight: 700;">
-            Tudo o que
-            fazemos é pensado para oferecer desafios na medida certa, com equilíbrio
-            entre sorte e estratégia.
-        </span>
-    </p>
-</div>
-<div class="regras" style="padding-left: 2rem;padding-right: 2rem;padding-bottom: 2rem;padding-top: 1rem;">
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-variant: normal; font-weight: 700;">
-            REGRAS
-            DO GRUPO WAR-GROW
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-variant: normal; font-weight: 700;">
-            RESPEITO
-            AOS MEMBROS DO GRUPO DENTRO E FORA DO JOGO
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            Evitar postar mensagens que possam ser
-            interpretadas por um ou mais membros como sendo de caráter ofensivo, as
-            brincadeiras devem ser saudáveis e sempre com respeito. Não passe
-            correntes, faça propagandas, discuta política, religião, futebol, ou
-            qualquer outro tema que não faça parte do perfil do grupo. Temos como objetivo orientar as pessoas para que possamos nos divertir e conviver em harmonia.
-            Caso haja confusão pela insistência em descumprir as regras, os envolvidos ou envolvidas poderão ser expulsos ou expulsas do grupo.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-variant: normal; font-weight: 700;">LISTA</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            Colocar o nome (igual ao cadastrado no sistema) seguido do apelido (igual ao que for jogar) entre
-            parênteses e retirar o nome da lista se não for jogar. As listas terão
-            validade de até 30 minutos, na hora que a mesa estiver criada os
-            jogadores da lista terão prioridade, mas o tempo de espera é de no
-            máximo 5 minutos à partir da criação da mesa e chamada dos jogadores da
-            lista no grupo, se todos os jogadores da lista estiverem na mesa não
-            precisa esperar pelos 5 minutos para iniciar a partida. Identificar o
-            momento que a mesa for criada no grupo utilizando a frase: "mesa
-            criada". Quem cria a mesa é responsável por atualizar e gerenciar a
-            lista podendo ou não iniciar a partida com quem estiver presente e usar
-            sempre o bom senso para evitar confusão.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-variant: normal; font-weight: 700;">PARTIDAS</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            As partidas podem ser jogadas quantas
-            vezes quiser, uma de cada vez com 3, 4, 5 ou 6 jogadores. Para que as
-            partidas sejam válidas para o ranking é necessário que uma lista com o
-            número da partida e data seja montada com o nome do jogador e apelido,
-            com início e resultado marcados no grupo. Partidas sem início e
-            resultado não serão contabilizadas no ranking. O
-        </span><span class="C9DxTc " style="">
-            vencedor ou a vencedora da partida deve fazer o
-            cadastro do resultado no sistema.
-        </span><a class="XqQF9c"
-                  href="~/criar-partida"
-                  style="color: inherit; text-decoration: none;">
-            <span class="C9DxTc aw5Odc " style="text-decoration: underline;">Clique aqui</span>
-        </a><span class="C9DxTc " style="">
-            para cadastrar o
-            resultado. Escolha a data da partida, os jogadores, horário de início e
-            término da partida.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-variant: normal; font-weight: 700;">PARTIDAS X1, X2 e X3</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            As partidas podem ser jogadas quantas
-            vezes quiser, uma de cada vez com 2, 4 ou 6 jogadores. Para que as
-            partidas sejam válidas para o ranking é necessário que uma lista com o
-            número da partida e data seja montada com o nome do jogador e apelido,
-            com início e resultado marcados no grupo. Partidas sem início e
-            resultado não serão contabilizadas no ranking. O
-        </span><span class="C9DxTc " style="">
-            vencedor ou a vencedora da partida deve fazer o
-            cadastro do resultado no sistema.
-        </span><a class="XqQF9c"
-                  href="~/criar-partida"
-                  style="color: inherit; text-decoration: none;">
-            <span class="C9DxTc aw5Odc " style="text-decoration: underline;">Clique aqui</span>
-        </a><span class="C9DxTc " style="">
-            para cadastrar o
-            resultado. Escolha a data da partida, os jogadores, horário de início e
-            término da partida.
-        </span>
-        <br /><span>Para as partidas "X1" quem vencer a partida deve obrigatoriamente escolher o jogador fake "X1 (Partida X1)" além do jogador ou jogadora que perdeu.</span>
-        <br /><span>Para as partidas "X2" a dupla que vencer a partida deve obrigatoriamente escolher o jogador fake "X2 (Partida X2)" além da dupla que perdeu, um de cada vez como se fosse registrar o resultado de uma partida X1. Cada jogador ou jogadora que venceu a partida deve registrar separadamente o resultado como se fosse X1 escolhendo um jogador ou jogadora da dupla que perdeu.</span>
-        <br /><span>Para as partidas "X3", se forem 3 duplas, a dupla que vencer a partida deve obrigatoriamente escolher o jogador fake "X3 (Partida X3)" além das duplas que perderam, uma dupla de cada vez como se fossem registrar o resultado de uma partida X1. Cada jogador ou jogadora que venceu a partida deve registrar separadamente o resultado como se fosse X1 escolhendo uma dupla que perdeu. No caso de 2 trios, o trio vencedor deve obrigatoriamente escolher o jogador fake "X3 (Partida X3)" além do trio que perdeu, um jogador ou jogadora de cada vez como se fossem registrar o resultado de uma partida X1. Cada jogador ou jogadora que venceu a partida deve registrar separadamente o resultado como se fosse X1 escolhendo um jogador ou jogadora do trio que perdeu.</span>
-        <br /><span>Em resumo, se for uma partida X1 teremos apenas um resultado, se for uma partida X2 teremos 2 resuldados e se for uma partida X3 teremos 2 resultados para partidas com 3 duplas ou 3 resultados para partidas com 2 trios. Cada vencedor ou vencedora deve fazer o registro do resultado sem repetir os jogadores ou jogadoras que perderam e usando os jogadores fake de cada categoria (X1, X2 ou X3).</span>
-        <br /><span>A definição das posições dos jogadores durante as partidas de X1, X2 e X3 fica a critério dos próprios jogadores e deve ser definido antes de cada partida e avisado no grupo com o consenso de todos os participantes.</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-variant: normal; font-weight: 700;">
-            PARTIDAS
-            REINICIADAS
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            Partidas iniciadas só podem ser
-            reiniciadas se travar o jogo de alguém ou alguém cair na primeira
-            rodada, se houver ataque a partida não pode ser reiniciada. Usem sempre
-            o bom senso e evitem confusão, todos estão no grupo para se divertir e
-            jogar com respeito e honestidade.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-variant: normal; font-weight: 700;">CHAT</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            Usar o chat com moderação e respeito, não
-            falar sobre estratégias ou jogadas que possam influenciar no resultado
-            da partida e não comentar no grupo sobre partidas em
-            andamento.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            Caso algum jogador se sinta prejudicado a
-            partida pode ser anulada por meio de análise feita pelo moderador ou
-            votação, o voto da maioria decide o resultado e se houver empate na
-            votação a decisão é do moderador.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-weight: 700;">BOT</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc " style="">
-            Se o
-            BOT estiver jogado por 3 rodadas seguidas, não pode voltar a jogar, os outros
-            jogadores devem avisar no CHAT e/ou no GRUPO e a pessoa deve abandonar
-            imediatamente.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            Caso algum jogador se sinta prejudicado a
-            partida pode ser anulada por meio de análise feita pelo moderador ou
-            votação, o voto da maioria decide o resultado e se houver empate na
-            votação a decisão é do moderador.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-weight: 700;">DEIXAR PASSAR O TEMPO</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc " style="">
-            Se deixar passar o tempo por mais de 3 rodadas não pode voltar a jogar, os outros
-            jogadores devem avisar no CHAT e/ou no GRUPO e a pessoa deve abandonar
-            imediatamente.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-variant: normal;">
-            Caso algum jogador se sinta prejudicado a
-            partida pode ser anulada por meio de análise feita pelo moderador ou
-            votação, o voto da maioria decide o resultado e se houver empate na
-            votação a decisão é do moderador.
-        </span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc "
-              style="font-family: 'Open sans', Arial; font-style: italic; font-weight: 700;">PONTUAÇÃO</span>
-    </p>
-    <p dir="ltr" class="zfr3Q CDt4Ke " style="">
-        <span class="C9DxTc " style="">
-            A
-            pontuação é calculada automaticamente pelo sistema usando o desempenho e
-            de acordo com a duração da partida. O cálculo do desempenho é o número
-            de vitórias pelo número de partidas. Quanto maior o número de vitórias,
-            melhor o desempenho. Quanto menor a duração da partida, maior a
-            pontuação.
-        </span>
-    </p>
-    <ul class="n8H08c UVNKR "
-        style="list-style-type: square; margin-left: 0; margin-right: 0; padding: 0;">
-        <li dir="ltr" class="zfr3Q TYR86d eD0Rn " style="margin-left: 15.0pt;">
-            <p dir="ltr" role="presentation" class="zfr3Q CDt4Ke "
-               style="margin-left: 0.0pt; padding-left: 0.0pt; text-indent: 0.0pt;">
-                <span class="C9DxTc " style="">
-                    Partidas de até 30 minutos de duração
-                    valem 40 pontos;
-                </span>
-            </p>
-        </li>
-        <li dir="ltr" class="zfr3Q TYR86d eD0Rn " style="margin-left: 15.0pt;">
-            <p dir="ltr" role="presentation" class="zfr3Q CDt4Ke "
-               style="margin-left: 0.0pt; padding-left: 0.0pt; text-indent: 0.0pt;">
-                <span class="C9DxTc " style="">
-                    Partidas com duração entre 31 minutos
-                    e 60 minutos valem 30 pontos;
-                </span>
-            </p>
-        </li>
-        <li dir="ltr" class="zfr3Q TYR86d eD0Rn " style="margin-left: 15.0pt;">
-            <p dir="ltr" role="presentation" class="zfr3Q CDt4Ke "
-               style="margin-left: 0.0pt; padding-left: 0.0pt; text-indent: 0.0pt;">
-                <span class="C9DxTc " style="font-variant: normal;">
-                    Partidas com
-                    duração entre
-                </span><span class="C9DxTc "
-                             style="">6</span><span class="C9DxTc "
-                                                    style="font-variant: normal;">1 minutos e </span><span class="C9DxTc " style="">9</span><span class="C9DxTc "
-                                                                                                                                                  style="font-variant: normal;">0 minutos valem </span><span class="C9DxTc " style="">2</span><span class="C9DxTc "
-                                                                                                                                                                                                                                                    style="font-variant: normal;">0 pontos;</span>
-            </p>
-        </li>
-        <li dir="ltr" class="zfr3Q TYR86d eD0Rn " style="margin-left: 15.0pt;">
-            <p dir="ltr" role="presentation" class="zfr3Q CDt4Ke "
-               style="margin-left: 0.0pt; padding-left: 0.0pt; text-indent: 0.0pt;">
-                <span class="C9DxTc " style="font-variant: normal;">
-                    Partidas com
-                    duração
-                </span><span class="C9DxTc " style="">
-                    maior
-                    que
-                </span><span class="C9DxTc " style="font-variant: normal;">
-                </span><span class="C9DxTc " style="">91</span><span class="C9DxTc "
-                                                                     style="font-variant: normal;"> minutos valem </span><span class="C9DxTc " style="">1</span><span class="C9DxTc "
-                                                                                                                                                                      style="font-variant: normal;">0 pontos</span><span class="C9DxTc " style="">. Será permitido o abandono da partida após os 90 minutos, basta avisar no CHAT e/ou no GRUPO.</span>
-            </p>
-        </li>
-    </ul>
-</div>
+            .section {
+                background-color: rgba(0,0,0,.1); /* Cor de fundo das seções */
+                padding: 20px;
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            h4 {
+                cursor: pointer;
+            }
+
+            p {
+                margin: 10px 0;
+            }
+
+            .emoji {
+                font-size: 20px;
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="section" style="margin-top: -20px;">
+            <h4><strong><span class="emoji">🎲</span>WAR-GROW <span class="emoji">💣</span></strong></h4>
+            <h6><strong>Jogar limpo é a melhor estratégia!</strong><span class="emoji"> 😎</span></h6>
+            <h6>Sempre agimos com honestidade, respeito e transparência. 🤝</h6>
+            <h6>Sorte é para quem merece! 🍀</h6>
+            <h6>Tudo o que fazemos é pensado para oferecer desafios na medida certa, com equilíbrio entre sorte e estratégia. 🧠</h6>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">📋</span>REGRAS DO GRUPO <span class="emoji">📣</span></h4>
+            <p><strong>Respeito aos membros do grupo dentro e fora do jogo</strong> 🤗</p>
+            <p>Evite postar mensagens ofensivas, mantenha as brincadeiras saudáveis e respeitosas. Não discuta política, religião, futebol ou temas não relacionados ao grupo. Se não seguir as regras, pode ser expulso! 👟</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">📜</span>LISTA <span class="emoji">📝</span></h4>
+            <p>Adicione seu nome e apelido entre parênteses e retire da lista se não for jogar. Lembre-se, prioridade para os da lista, mas seja rápido! 📅</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">🎮</span>PARTIDAS <span class="emoji">🎲</span></h4>
+            <p>Jogue quantas vezes quiser, mas lembre-se de registrar as partidas para o ranking. Quem vencer deve cadastrar o resultado! 🏆</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">🎲</span>PARTIDAS X1, X2 e X3 <span class="emoji">🎯</span></h4>
+            <p>&nbsp;</p>
+            <p>🏆 Para as batalhas épicas "X1," quando você for o campeão, você tem que escolher o jogador fake "X1 (Partida X1)" 🤖, além da vítima derrotada.</p>
+            <p>&nbsp;</p>
+            <p>🥇 Nas partidas "X2," a dupla vitoriosa não pode escapar! Eles devem selecionar o jogador fake "X2 (Partida X2)" 🤖, além da dupla que sofreu a derrota, um de cada vez, como se estivessem fazendo um registro de resultados de partida X1. Cada vencedor precisa anotar separadamente o resultado, escolhendo um membro da dupla perdedora.</p>
+            <p>&nbsp;</p>
+            <p>🏁 E agora, para as grandiosas partidas "X3" - se houver 3 duplas no ringue 🥊, a dupla vitoriosa deve, sem falta, escolher o jogador fake "X3 (Partida X3)" 🤖, além das duplas derrotadas. Eles farão isso um par de cada vez, como se estivessem registrando uma partida X1. Cada jogador que sair vitorioso deve registrar separadamente o resultado, selecionando uma dupla que perdeu.</p>
+            <p>&nbsp;</p>
+            <p>✌️ Se tivermos 2 trios batalhando 💥, o trio vencedor também deve se render ao jogador fake "X3 (Partida X3)" 🤖, além do trio que não teve sorte. Eles farão isso um jogador de cada vez, como se estivessem apontando o dedo para a derrota. Cada campeão deve fazer o registro do resultado separadamente, escolhendo um jogador do trio que perdeu.</p>
+            <p>&nbsp;</p>
+            <p><strong>📊 Resumindo a parada:</strong></p>
+            <p>◼ Partida X1 = 1 resultado</p>
+            <p>◼ Partida X2 = 2 resultados</p>
+            <p>◼ Partida X3 com 3 duplas = 2 resultados</p>
+            <p>◼ Partida X3 com 2 trios = 3 resultados</p>
+            <p>&nbsp;</p>
+            <p>💥 Cada vencedor deve ser criativo no registro dos resultados, sem repetir os perdedores, e usando os jogadores fake (X1, X2 ou X3) como se fossem a cereja do bolo! 🍒 Agora é só se divertir e jogar sem limites! 🚀</p>
+            <p>&nbsp;</p>
+            <p>🎮 Defina as posições antes da partida! 🔢</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">↩</span>PARTIDAS REINICIADAS <span class="emoji">🔄</span></h4>
+            <p>Reinicie apenas se travar ou alguém cair na 1ª rodada. Se houver ataque, não reinicie. Jogue com respeito! 🔄</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">💬</span>CHAT <span class="emoji">💭</span></h4>
+            <p>Use o chat com moderação e evite falar sobre estratégias que influenciem o jogo. Não comente sobre partidas em andamento! 🤐</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">👾</span>BOT <span class="emoji">🤖</span></h4>
+            <p>Se o BOT jogar por 3 rodadas seguidas, não jogue mais. Avise no chat e no grupo! 🤖</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">⏱</span>DEIXAR PASSAR O TEMPO <span class="emoji">⏳</span></h4>
+            <p>Se deixar passar o tempo por mais de 3 rodadas, não jogue mais. Avise no chat e no grupo! ⏰</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">📊</span>PONTUAÇÃO <span class="emoji">📈</span></h4>
+            <p>A pontuação é calculada automaticamente com base no desempenho e na duração das partidas. Quanto mais vitórias e menos tempo, melhor! 🏅</p>
+            <p>Partidas de até 30 minutos: 40 pontos. 🕒</p>
+            <p>31 a 60 minutos: 30 pontos. 🕕</p>
+            <p>61 a 90 minutos: 20 pontos. 🕘</p>
+            <p>Mais de 90 minutos: 10 pontos, com permissão para abandonar após 90 minutos. ⏳</p>
+        </div>
+
+        <script>
+            // Seleciona todas as seções
+            const sections = document.querySelectorAll('.section');
+
+            // Adiciona um evento de clique para cada seção
+            sections.forEach(section => {
+                const title = section.querySelector('h4');
+                const content = section.querySelectorAll('p');
+
+                // Inicialmente, todas as seções estão fechadas
+                content.forEach(p => {
+                    p.style.display = 'none';
+                });
+
+                // Quando o título é clicado, alterna a exibição do conteúdo
+                title.addEventListener('click', () => {
+                    content.forEach(p => {
+                        p.style.display = (p.style.display === 'none') ? 'block' : 'none';
+                    });
+                });
+            });
+        </script>
+    </body>
+    </html>
+}
+else if (User.Identity.GetTema() == "2")
+{
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Regras do grupo War-Grow</title>
+        <style>
+            body {
+            color: #ffffff; /* Cor do texto */
+            font-family: Arial, sans-serif;
+            }
+
+            .section {
+                background-color: #343a40; /* Cor de fundo das seções */
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            }
+
+            h4 {
+            cursor: pointer;
+            }
+
+            p {
+            margin: 10px 0;
+            }
+
+            .emoji {
+            font-size: 20px;
+            margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="section" style="margin-top: -20px;">
+            <h4><strong><span class="emoji">🎲</span>WAR-GROW <span class="emoji">💣</span></strong></h4>
+            <h6><strong>Jogar limpo é a melhor estratégia!</strong><span class="emoji"> 😎</span></h6>
+            <h6>Sempre agimos com honestidade, respeito e transparência. 🤝</h6>
+            <h6>Sorte é para quem merece! 🍀</h6>
+            <h6>Tudo o que fazemos é pensado para oferecer desafios na medida certa, com equilíbrio entre sorte e estratégia. 🧠</h6>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">📋</span>REGRAS DO GRUPO <span class="emoji">📣</span></h4>
+            <p><strong>Respeito aos membros do grupo dentro e fora do jogo</strong> 🤗</p>
+            <p>Evite postar mensagens ofensivas, mantenha as brincadeiras saudáveis e respeitosas. Não discuta política, religião, futebol ou temas não relacionados ao grupo. Se não seguir as regras, pode ser expulso! 👟</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">📜</span>LISTA <span class="emoji">📝</span></h4>
+            <p>Adicione seu nome e apelido entre parênteses e retire da lista se não for jogar. Lembre-se, prioridade para os da lista, mas seja rápido! 📅</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">🎮</span>PARTIDAS <span class="emoji">🎲</span></h4>
+            <p>Jogue quantas vezes quiser, mas lembre-se de registrar as partidas para o ranking. Quem vencer deve cadastrar o resultado! 🏆</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">🎲</span>PARTIDAS X1, X2 e X3 <span class="emoji">🎯</span></h4>
+            <p>🏆 Para as batalhas épicas "X1", quando você for o campeão, você tem que escolher o jogador fake "X1 (Partida X1)" 🤖, além da vítima derrotada.</p>
+            <p>🥇 Nas partidas "X2", a dupla vitoriosa não pode escapar! Eles devem selecionar o jogador fake "X2 (Partida X2)" 🤖, além da dupla que sofreu a derrota, um de cada vez, como se estivessem fazendo um registro de resultados de partida X1. Cada vencedor precisa anotar separadamente o resultado, escolhendo um membro da dupla perdedora.</p>
+            <p>🏁 E agora, para as grandiosas partidas "X3" - se houver 3 duplas no ringue 🥊, a dupla vitoriosa deve, sem falta, escolher o jogador fake "X3 (Partida X3)" 🤖, além das duplas derrotadas. Eles farão isso um par de cada vez, como se estivessem registrando uma partida X1. Cada jogador que sair vitorioso deve registrar separadamente o resultado, selecionando uma dupla que perdeu.</p>
+            <p>✌️ Se tivermos 2 trios batalhando 💥, o trio vencedor também deve se render ao jogador fake "X3 (Partida X3)" 🤖, além do trio que não teve sorte. Eles farão isso um jogador de cada vez, como se estivessem apontando o dedo para a derrota. Cada campeão deve fazer o registro do resultado separadamente, escolhendo um jogador do trio que perdeu.</p>
+            <p><strong>📊 Resumindo a parada:</strong></p>
+            <p>◼ Partida X1 = 1 resultado</p>
+            <p>◼ Partida X2 = 2 resultados</p>
+            <p>◼ Partida X3 com 3 duplas = 2 resultados</p>
+            <p>◼ Partida X3 com 2 trios = 3 resultados</p>
+            <p>💥 Cada vencedor deve ser criativo no registro dos resultados, sem repetir os perdedores, e usando os jogadores fake (X1, X2 ou X3) como se fossem a cereja do bolo! 🍒 Agora é só se divertir e jogar sem limites! 🚀</p>
+            <p>🎮 Defina as posições antes da partida! 🔢</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">💣</span>PARTIDAS X4 <span class="emoji">🔪</span></h4>
+            <p>🎮 Preparem-se para a diversão com o jogo mata-mata X4, onde o número mágico é 4! Reúnam-se em grupos de 4 jogadores e vamos à ação! O objetivo? Eliminar alguém, é claro! 🔢 Assim que alguém for eliminado, a partida chega ao fim, e o grande exterminador é coroado o vencedor da vez! 🏆</p>
+            <p>🩸 E agora, para as Batalhas Sangrentas "X4" - quando você assume o papel de assassino 🔪 - você tem um desafio extra! Você deve identificar o jogador fake "X4 (Partida X4)" 🤖 entre seus alvos, além da pobre vítima 💀 e os outros coitados. Vai ser um festival de adrenalina e caos! 💥</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">⌚</span>PARTIDAS VENCIDAS NO TEMPO <span class="emoji">⏲</span></h4>
+            <p>🗣 Combine o tempo máximo de duração da partida, se não atingir o limite pré estabelecido registre normalmente! 🏆</p>
+            <p>⌛ Caso o tempo combinado seja atingido sem ninguém ter atingido o objetivo, informe no chat a última rodada e determine o vencedor da partida através dos critérios de desempate.</p>
+            <p><strong>📊 Critérios de desempate:</strong></p>
+            <p>🗺 Totalidade de cada continente:</p>
+            <p>A mesma quantidade na reposição dos exércitos.</p>
+            <p>◼ Ásia: 7 pontos 🌏</p>
+            <p>◼ América do Norte: 5 pontos 🌎</p>
+            <p>◼ Europa: 5 pontos 🌍</p>
+            <p>◼ África: 3 pontos 🌍</p>
+            <p>◼ Oceania: 2 pontos 🌏</p>
+            <p>◼ América do Sul: 2 pontos🌎</p>
+            <p>⚔ Quantidade de exércitos:</p>
+            <p>◼ 1% do somatório dos mesmos</p>
+            <p>🗺 Quantidade de territórios:</p>
+            <p>◼ 1 ponto para cada território</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">↩</span>PARTIDAS REINICIADAS <span class="emoji">🔄</span></h4>
+            <p>Reinicie apenas se travar ou alguém cair na 1ª rodada. Se houver ataque, não reinicie. Jogue com respeito! 🔄</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">💬</span>CHAT <span class="emoji">💭</span></h4>
+            <p>Use o chat com moderação e evite falar sobre estratégias que influenciem o jogo. Não comente sobre partidas em andamento! 🤐</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">👾</span>BOT <span class="emoji">🤖</span></h4>
+            <p>Se o BOT jogar por 3 rodadas seguidas, não jogue mais. Avise no chat e no grupo! 🤖</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">⏱</span>DEIXAR PASSAR O TEMPO <span class="emoji">⏳</span></h4>
+            <p>Se deixar passar o tempo por mais de 3 rodadas, não jogue mais. Avise no chat e no grupo! ⏰</p>
+        </div>
+
+        <div class="section">
+            <h4><span class="emoji">📊</span>PONTUAÇÃO <span class="emoji">📈</span></h4>
+            <p>A pontuação é calculada automaticamente com base no desempenho e na duração das partidas. Quanto mais vitórias e menos tempo, melhor! 🏅</p>
+            <p>Partidas de até 30 minutos: 40 pontos. 🕒</p>
+            <p>31 a 60 minutos: 30 pontos. 🕕</p>
+            <p>61 a 90 minutos: 20 pontos. 🕘</p>
+            <p>Mais de 90 minutos: 10 pontos, com permissão para abandonar após 90 minutos. ⏳</p>
+        </div>
+
+        <script>
+            // Seleciona todas as seções
+            const sections = document.querySelectorAll('.section');
+
+            // Adiciona um evento de clique para cada seção
+            sections.forEach(section => {
+            const title = section.querySelector('h4');
+            const content = section.querySelectorAll('p');
+
+            // Inicialmente, todas as seções estão fechadas
+            content.forEach(p => {
+            p.style.display = 'none';
+            });
+
+            // Quando o título é clicado, alterna a exibição do conteúdo
+            title.addEventListener('click', () => {
+            content.forEach(p => {
+            p.style.display = (p.style.display === 'none') ? 'block' : 'none';
+            });
+            });
+            });
+        </script>
+    </body>
+    </html>
+}
