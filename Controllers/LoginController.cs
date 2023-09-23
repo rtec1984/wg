@@ -134,7 +134,6 @@ namespace ProjectAmaterasu.Controllers
         }
         #endregion
 
-
         #region Verificar Usuário (Login)
         public IActionResult VerificarUsuario(UsuarioModels Login, string ReturnUrl)
         {
@@ -373,10 +372,31 @@ namespace ProjectAmaterasu.Controllers
                     connection.Execute("Update Usuario SET senha = @senha, SenhaTemporaria = 1 where Id = @Id", new { senha = codigoverificacao, Id = Usuario.Id });
 
                     var email = new MimeMessage();
-                    email.From.Add(MailboxAddress.Parse(SMTP.UsuarioServidor));
+
+                    // Cria um objeto MailboxAddress personalizado para o remetente
+                    var remetente = new MailboxAddress("Suporte WG", "suporte@wg.com");
+                    email.From.Add(remetente);
+
+                    // Define o destinatário do e-mail com base no endereço de e-mail do usuário.
                     email.To.Add(MailboxAddress.Parse(Usuario.Email));
+
+                    // Define o assunto do e-mail.
                     email.Subject = "Solicitação de troca de senha.";
-                    email.Body = new TextPart(TextFormat.Html) { Text = SMTP.CorpoEmail.Replace("{1}", codigoverificacao).Replace("{2}", Usuario.Nome) };
+
+                    // Substitua a URL no corpo do e-mail pelo texto de link amigável.
+                    string corpoEmail = SMTP.CorpoEmail
+                        .Replace("{2}", Usuario.Nome);
+
+                    string linkAmigavel = $"<a href='https://wgfm.azurewebsites.net/esqueci-a-senha-confirmacao/{codigoverificacao}'>Clique aqui</a> para definir sua nova senha.";
+
+                    // Agora substitua a parte do corpo do e-mail onde você deseja que o link seja exibido.
+                    corpoEmail = corpoEmail.Replace("{1}", linkAmigavel);
+
+                    // Defina o corpo do e-mail como HTML com o texto processado acima.
+                    email.Body = new TextPart(TextFormat.Html)
+                    {
+                        Text = corpoEmail
+                    };
 
                     using (var smtp = new SmtpClient())
                     {
@@ -466,12 +486,15 @@ namespace ProjectAmaterasu.Controllers
                         var criptografia = BCrypt.Net.BCrypt.HashPassword(mudarsenha.Email + "salt" + mudarsenha.Senha, workFactor: 12);
                         connection.Execute("UPDATE Usuario SET Senha = @NovaSenha, SenhaTemporaria = 0 WHERE Senha = @Senha", new { NovaSenha = criptografia, Senha = mudarsenha.CodigoConfirmacao });
 
-                        var SMTP = connection.Query<SMTPModels>(@"SELECT * FROM SMTP where TipoEmail = 'Senha Alterada'").FirstOrDefault();
+                        var SMTP = connection.Query<SMTPModels>(@"SELECT * FROM SMTP WHERE TipoEmail = 'Senha Alterada'").FirstOrDefault();
                         var email = new MimeMessage();
-                        email.From.Add(MailboxAddress.Parse(SMTP.UsuarioServidor));
+                        email.From.Add(new MailboxAddress("Suporte WG", SMTP.UsuarioServidor)); // Nome do remetente como "Suporte WG"
                         email.To.Add(MailboxAddress.Parse(mudarsenha.Email));
                         email.Subject = "Troca de senha realizada com sucesso!";
-                        email.Body = new TextPart(TextFormat.Html) { Text = SMTP.CorpoEmail };
+                        email.Body = new TextPart(TextFormat.Html)
+                        {
+                            Text = $"Olá, {UsuarioVerificacao.Nome}, a sua senha foi alterada com sucesso! <a href='https://wgfm.azurewebsites.net/'>Clique aqui</a> para acessar o sistema."
+                        };
 
                         using (var smtp = new SmtpClient())
                         {
