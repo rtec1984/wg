@@ -109,7 +109,11 @@ namespace ProjectAmaterasu.Controllers
             {
                 pontuacao = 0;
             }
-            else if (duracao <= 30)
+            else if (duracao <= 15)
+            {
+                pontuacao = 50;
+            }
+            else if (duracao > 15 && duracao <= 30)
             {
                 pontuacao = 40;
             }
